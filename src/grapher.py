@@ -7,14 +7,30 @@ from point import point
 
 MAX_WIDTHSIZE = 500     #210 mm
 MAX_HEIGHTSIZE = 500    #297 mm
-SCALE = 70
+SCALE = 71
 PRECISION = 10
+
+def increase():
+    global SCALE
+    SCALE += 10
+
+def degrease():
+    global SCALE
+    SCALE = max(1, SCALE - 10)
 
 #increasing scale
 def plus(event):
     #some code, which cleaning Canvas
-    k += 10
-    create_graphic(panel, graphic, function)
+    panel.delete("group")
+    increase()
+    create_graphic(panel, function)
+
+#degreasing scale
+def minus(event):
+    #some code, which cleaning Canvas
+    panel.delete("group")
+    degrease()
+    create_graphic(panel, function)
 
 #parsing function
 def func(x, function):
@@ -31,7 +47,8 @@ def draw_graphic(p, panel):
                           fill="red", tag="group")
 
 #creating graphic
-def create_graphic(panel, graphic, function):
+def create_graphic(panel, function):
+    graphic = []
     for i in range(-250 * PRECISION, 250 * PRECISION + 1):
         j = i / PRECISION
         try:
@@ -41,8 +58,7 @@ def create_graphic(panel, graphic, function):
             continue
             
     draw_graphic(graphic, panel)
-    return panel
-        
+
 #creating GUI
 root = tkinter.Tk()
 panel = tkinter.Canvas(root, width=MAX_WIDTHSIZE, height=MAX_HEIGHTSIZE)
