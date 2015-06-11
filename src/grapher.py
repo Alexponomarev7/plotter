@@ -70,7 +70,7 @@ panel.create_line(MAX_WIDTHSIZE / 2, 0, MAX_WIDTHSIZE / 2, MAX_HEIGHTSIZE,
                   fill="gray50")
 panel.create_line(0, MAX_HEIGHTSIZE / 2, MAX_WIDTHSIZE, MAX_HEIGHTSIZE / 2,
                   fill="gray50")
-panel = create_graphic(panel, graphic, function)
+create_graphic(panel, function)
 
 root.bind('<i>', plus)   #increase
 root.bind('<d>', minus)  #degrease
