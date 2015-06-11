@@ -1,1 +1,0 @@
-sudo apt-get install pkg-config libcairo2-dev python3-cairo 
