@@ -76,6 +76,6 @@ panel.create_line(0, MAX_HEIGHTSIZE / 2, MAX_WIDTHSIZE, MAX_HEIGHTSIZE / 2,
                   fill="gray50")
 create_graphic(panel, function)
 
-root.bind('<KeyPress>', plus)   #increase
+root.bind('<i>', plus)   #increase
 root.bind('<d>', minus)  #degrease
 root.mainloop()
