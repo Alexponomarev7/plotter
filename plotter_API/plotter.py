@@ -1,5 +1,4 @@
-# Copyright (c) Alex Ponomarev.
-# Distributed under the terms of the MIT License.
+# НЕ НАШЕ, ПРИМЕР АРГПАРСИНГА
 
 import argparse
 import os.path
