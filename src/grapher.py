@@ -4,6 +4,7 @@
 import tkinter
 import math 
 from point import point
+from drawing import draw
 
 MAX_WIDTHSIZE = 500     #210 mm
 MAX_HEIGHTSIZE = 500    #297 mm
@@ -45,6 +46,9 @@ def draw_graphic(p, panel):
                           p[i + 1].x + MAX_WIDTHSIZE / 2,
                           p[i + 1].y + MAX_HEIGHTSIZE / 2,
                           fill="red", tag="group")
+        
+    draw(p, "graphic")
+    
 
 #creating graphic
 def create_graphic(panel, function):
@@ -72,6 +76,6 @@ panel.create_line(0, MAX_HEIGHTSIZE / 2, MAX_WIDTHSIZE, MAX_HEIGHTSIZE / 2,
                   fill="gray50")
 create_graphic(panel, function)
 
-root.bind('<i>', plus)   #increase
+root.bind('<KeyPress>', plus)   #increase
 root.bind('<d>', minus)  #degrease
 root.mainloop()
