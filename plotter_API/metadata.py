@@ -3,7 +3,7 @@ Project metadata
 Information describing the project.
 """
 
-# Copyright (c) Timur Iskhakov.
+# Copyright (c) Alex Ponomarev.
 # Distributed under the terms of the MIT License.
 
 
