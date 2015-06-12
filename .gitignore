@@ -14,3 +14,4 @@ plotter_API/.DS_Store
 *.*.gif
 */__pycache__/*
 >>>>>>> origin/master
+driver/test*
