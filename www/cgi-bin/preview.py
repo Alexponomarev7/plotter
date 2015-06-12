@@ -58,7 +58,7 @@ else:
             </head>
             <body>
                 <h1>Preview</h1>
-                <p>Number of formulas: """ + str(len(formulas)) + """
+                <p>Number of formulas: """ + str(len(formulas)) + """</p>
                 <img src="/img/""" + seed.value + """.gif" />
                 <form action="/cgi-bin/print.py">
                     <button>Print</button>
