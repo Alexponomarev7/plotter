@@ -1,9 +1,8 @@
-Cleaning the text of profanity.
+XYplotter.
 ===============================
 
-Clearing text or texts corpus in Russian of obscene vocabulary.
-
-Can be used with any set of stopwords; words are matched by lemmatisation (using [pymorphy2](https://github.com/kmike/pymorphy2)) and similarities analysis.
+Drawing graphic images on paper
+Can be used as typographic builder or Bezier's curves builder.
 
 
 ---
