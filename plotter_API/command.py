@@ -1,3 +1,5 @@
+# Copyright (c) Alex Ponomarev.
+# Distributed under the terms of the MIT License.
 #class command for creating code for API
 
 types = ['pencilUp',

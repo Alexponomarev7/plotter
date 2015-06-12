@@ -1,3 +1,5 @@
+# НЕ НАШЕ, ПРИМЕР АРГПАРСИНГА
+
 import argparse
 import os.path
 import sys
