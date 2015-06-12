@@ -20,8 +20,7 @@ def transform(pt, matr=None):
     if matr is None:
         matr = get_current_matrix()
     P = matr * matrix([pt.x, pt.y, 1]).transpose()
-    ans = point(P.tolist()[0][0] / P.tolist()[2][0], 
-            P.tolist()[1][0] / P.tolist()[2][0])
+    ans = point(P.tolist()[0][0], P.tolist()[1][0])
 #    print('After: ', ans)
 #    print(matr)
     return ans
