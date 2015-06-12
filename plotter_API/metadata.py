@@ -21,4 +21,3 @@ emails = ['Alex.ponomarev7@ya.ru']
 license = 'MIT'
 copyright = '2015 ' + authors_string
 url = 'https://github.com/Alexponomarev7/plotter'
-
