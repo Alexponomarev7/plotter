@@ -53,7 +53,7 @@ def draw_graphic(p, panel):
                           p[i + 1].y + MAX_HEIGHTSIZE / 2,
                           fill="red", tag="group")
 
-    draw(p, "graphic")
+    draw(p, "test")
 
 
 # Creating graphic
