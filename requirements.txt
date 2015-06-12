@@ -1,1 +1,1 @@
-eaasy_install pillow
+easy_install pillow

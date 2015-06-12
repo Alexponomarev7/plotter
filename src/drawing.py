@@ -1,3 +1,6 @@
+# Copyright (c) Alex Ponomarev.
+# Distributed under the terms of the MIT License.
+
 from PIL import Image, ImageDraw
 
 WIDTH = 500
