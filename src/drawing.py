@@ -19,10 +19,8 @@ def draw(points, name):
 
     for i in range(len(points) - 1):
         # do the PIL image/draw (in memory) drawings
-        draw.line([points[i].x + WIDTH // 2,
-                   points[i].y + HEIGHT // 2,
-                   points[i + 1].x + WIDTH // 2,
-                   points[i + 1].y + HEIGHT // 2], RED)
+        draw.line([points[i].x, points[i].y,
+                   points[i + 1].x, points[i + 1].y], RED)
 
     # PIL image can be saved as .png .jpg .gif or .bmp file (among others)
     filename = name + ".gif"

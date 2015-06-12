@@ -17,7 +17,7 @@ def increase():
     SCALE += 10
 
 
-def degrease():
+def decrease():
     global SCALE
     SCALE = max(1, SCALE - 10)
 
@@ -30,11 +30,11 @@ def plus(event):
     create_graphic(panel, function)
 
 
-# Degreasing scale
+# Decreasing scale
 def minus(event):
     # Some code, which cleaning Canvas
     panel.delete("group")
-    degrease()
+    decrease()
     create_graphic(panel, function)
 
 
@@ -47,10 +47,7 @@ def func(x, function):
 # Drawing graphic
 def draw_graphic(p, panel):
     for i in range(len(p) - 1):
-        panel.create_line(p[i].x + MAX_WIDTHSIZE / 2,
-                          p[i].y + MAX_HEIGHTSIZE / 2,
-                          p[i + 1].x + MAX_WIDTHSIZE / 2,
-                          p[i + 1].y + MAX_HEIGHTSIZE / 2,
+        panel.create_line(p[i].x, p[i].y, p[i + 1].x, p[i + 1].y,
                           fill="red", tag="group")
 
     draw(p, "test")
@@ -62,7 +59,8 @@ def create_graphic(panel, function):
     for i in range(-250 * PRECISION, 250 * PRECISION + 1):
         j = i / PRECISION
         try:
-            p = point(j * SCALE, -func(j, function) * SCALE)
+            p = point(j * SCALE + MAX_WIDTHSIZE / 2,
+                      -func(j, function) * SCALE + MAX_HEIGHTSIZE / 2)
             graphic.append(p)
         except ZeroDivisionError:
             continue
@@ -83,5 +81,5 @@ panel.create_line(0, MAX_HEIGHTSIZE / 2, MAX_WIDTHSIZE, MAX_HEIGHTSIZE / 2,
 create_graphic(panel, function)
 
 root.bind('<i>', plus)   # Increase
-root.bind('<d>', minus)  # Degrease
+root.bind('<d>', minus)  # decrease
 root.mainloop()
