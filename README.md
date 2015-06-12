@@ -9,7 +9,7 @@ Can be used as typographic builder or Bezier's curves builder.
 ---
 ### Requirements
 
-  * Python 3.4+ **with headers**
+  * Python 3.4+
   * Pillow
 
 ### Installation
