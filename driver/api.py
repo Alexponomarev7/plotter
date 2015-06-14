@@ -92,16 +92,13 @@ def draw_rect(x1, y1, x2, y2):
     draw_polygon([point(x1, y1), point(x1, y2), point(x2, y2), point(x2, y1)])
 
 def draw_text(text, x, y, glyph_width=11, glyph_height=14):
-    dup_matrix()
-    add_transform(S(glyph_width / gl.GLYPH_WIDTH, glyph_height / gl.GLYPH_HEIGHT))
-    add_transform(T(x, y))
+    m = T(x, y) * S(glyph_width / gl.GLYPH_WIDTH, glyph_height / gl.GLYPH_HEIGHT)
     
     for symbol in text:
         if symbol not in gl.glyphs:
             symbol = ' '
         polylines = gl.split_into_polylines(gl.glyphs[symbol])
         for pl in polylines:
-            draw_polyline(pl)
-        add_transform(T(glyph_width, 0))
+            draw_polyline(list(map(lambda x: transform(x, m), pl)))
+        m = T(glyph_width, 0) * m
 
-    pop_matrix()
