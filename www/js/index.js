@@ -70,7 +70,7 @@ $(document).ready(function() {
         
         if(not_update != true)
         {
-            update_functions();
+            update_points();
         }
         
         $(".rm_btn").off("click").click(rm_element);
