@@ -1,5 +1,10 @@
 #! /usr/bin/env python3
 
+import sys
+from os import path
+
+sys.path.append(path.sep.join(path.abspath(__file__).split(path.sep)[:-2] + ['src']))
+
 from point import *
 
 fout = None
