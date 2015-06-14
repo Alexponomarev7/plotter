@@ -3,6 +3,7 @@
 from numpy import *
 from point import *
 import driver as drv
+import glyphs as gl
 
 def R(phi):
     return matrix([[cos(phi), -sin(phi), 0],
@@ -26,18 +27,7 @@ def transform(pt, matr=None):
     return ans
 
 def default_matrix():
-    return S(X_REAL_RESOLUTION / X_RESOLUTION, 
-            Y_REAL_RESOLUTION / Y_RESOLUTION)
-
-def anti_default_matrix():
-    return S(X_RESOLUTION / X_REAL_RESOLUTION, 
-            Y_RESOLUTION / Y_REAL_RESOLUTION)
-
-X_RESOLUTION = 1485
-Y_RESOLUTION = 1050
-X_REAL_RESOLUTION = 297
-Y_REAL_RESOLUTION = 210
-
+    return matrix(eye(3))
 
 matrices = [default_matrix()]
 
@@ -100,3 +90,18 @@ def draw_polyline(point_list):
 
 def draw_rect(x1, y1, x2, y2):
     draw_polygon([point(x1, y1), point(x1, y2), point(x2, y2), point(x2, y1)])
+
+def draw_text(text, x, y, glyph_width=11, glyph_height=14):
+    dup_matrix()
+    add_transform(S(glyph_width / gl.GLYPH_WIDTH, glyph_height / gl.GLYPH_HEIGHT))
+    add_transform(T(x, y))
+    
+    for symbol in text:
+        if symbol not in gl.glyphs:
+            symbol = ' '
+        polylines = gl.split_into_polylines(gl.glyphs[symbol])
+        for pl in polylines:
+            draw_polyline(pl)
+        add_transform(T(glyph_width, 0))
+
+    pop_matrix()

@@ -7,6 +7,17 @@ UP = False
 DOWN = True
 pencil_state = DOWN
 
+X_RESOLUTION = 1485
+Y_RESOLUTION = 1050
+X_REAL_RESOLUTION = 297
+Y_REAL_RESOLUTION = 210
+
+def kx():
+    return X_REAL_RESOLUTION / X_RESOLUTION
+
+def ky():
+    return Y_REAL_RESOLUTION / Y_RESOLUTION
+
 def start_document(fname):
     global fout
     fout = open(fname, 'w')
@@ -29,20 +40,13 @@ def pencil_down():
 def line_to(x, y, in_polygon=False):
     if not in_polygon:
         pencil_down()
-    print('G01', 'X' + str(x), 'Y' + str(y), file=fout)
+    print('G01', 'X%.8f' % (x * kx()), 'Y%.8f' % (y * ky()), file=fout)
     if not in_polygon:
         pencil_up()
 
 def move_to(x, y):
     pencil_up()
-    print('G01', 'X' + str(x), 'Y' + str(y), file=fout)
-
-def draw_circle(x, y, r):
-    pencil_up()
-    move_to(x + r, y)
-    pencil_down()
-    print('G03', 'X' + str(x + r), 'Y' + str(y), 'I' + str(-r), file=fout)
-    pencil_up()
+    print('G01', 'X%.8f' % (x * kx()), 'Y%.8f' % (y * ky()), file=fout)
 
 def draw_polygon(point_list):
     pencil_up()
@@ -57,10 +61,9 @@ def draw_polyline(point_list):
     move_to(point_list[0].x, point_list[0].y)
     pencil_down()
     for point in point_list[1:]:
-        line_to(point.x, point.y)
-    pencil.up()
+        line_to(point.x, point.y, True)
+    pencil_up()
 
 def end_document():
     print('%', file=fout)
     fout.close()
-
