@@ -6,8 +6,8 @@ import math
 from point import point
 from drawing import draw
 
-MAX_WIDTHSIZE = 500     # 210 mm
-MAX_HEIGHTSIZE = 500    # 297 mm
+MAX_WIDTHSIZE = 1485     # 210 mm
+MAX_HEIGHTSIZE = 1050    # 297 mm
 SCALE = 71
 PRECISION = 10
 path = None

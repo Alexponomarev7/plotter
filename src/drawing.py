@@ -3,8 +3,8 @@
 
 from PIL import Image, ImageDraw
 
-WIDTH = 500
-HEIGHT = 500
+WIDTH = 1485
+HEIGHT = 1050
 CENTER = HEIGHT // 2
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
