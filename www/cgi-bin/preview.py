@@ -28,24 +28,31 @@ task_type = form.getvalue("task_type")
 
 objects = [None] * int(form.getvalue("num_of_objects"))
 
-if task_type == "graph":
-    for i in range(len(objects)):
-        objects[i] = str(form.getvalue('function_' + str(i), '0'))
-elif task_type == "bezier":
-    for i in range(len(objects)):
-        objects[i] = point(float(form.getvalue('x_' + str(i), '0')), float(form.getvalue('y_' + str(i), '0')))
-
-print(objects, file=sys.stderr)
-
-if seed is not None:
+errors = False
+try:
     if task_type == "graph":
-        x_pos = float(form.getvalue("x_pos", 0))
-        y_pos = float(form.getvalue("y_pos", 0))
-        scale = float(form.getvalue("scale", 1))
-        print(x_pos, y_pos, scale, file=sys.stderr)
-        pl.graph(seed.value, objects, x_pos, y_pos, scale)
+        for i in range(len(objects)):
+            objects[i] = str(form.getvalue('function_' + str(i), '0'))
     elif task_type == "bezier":
-        pl.bezier(seed.value, objects)
+        for i in range(len(objects)):
+            objects[i] = point(float(form.getvalue('x_' + str(i), '0')), float(form.getvalue('y_' + str(i), '0')))
+
+    print(objects, file=sys.stderr)
+
+    if seed is not None:
+        if task_type == "graph":
+            x_pos = float(form.getvalue("x_pos", 0))
+            y_pos = float(form.getvalue("y_pos", 0))
+            scale = float(form.getvalue("scale", 1))
+            print(x_pos, y_pos, scale, file=sys.stderr)
+            pl.graph(seed.value, objects, x_pos, y_pos, scale)
+        elif task_type == "bezier":
+            pl.bezier(seed.value, objects)
+
+except Exception as e:
+    print(type(e), file=sys.stderr)
+    print(e, file=sys.stderr)
+    errors = True
 
 if seed is None:
     print("Set-cookie: seed=", time.time(), sep='')
@@ -53,6 +60,7 @@ if seed is None:
 print("Content-type: text/html\n")
 
 if seed is None:
+    print("ERROR: seed is None", file=sys.stderr)
     print("""<!DOCTYPE html>
         <html>
             <head>
@@ -63,6 +71,26 @@ if seed is None:
                 <p>
                     An error occured. Please reload page.
                 </p>
+                <button onClick="location.reload(); return false;">
+                    Reload
+                </button>
+            </body>
+        </html>
+    """)
+elif errors:
+    print("""<!DOCTYPE html>
+        <html>
+            <head>
+                <meta charset="utf-8" />
+                <title>Plotter error</title>
+            </head>
+            <body>
+                <p>
+                    An error occured while processing the task. Please go back and check out your input.
+                </p>
+                <button onClick="history.go(-1); return false;">
+                    Go back
+                </button>
             </body>
         </html>
     """)
@@ -83,6 +111,7 @@ else:
                 <button onClick="history.go(-1); return false;">
                     Go back
                 </button>
+                <a href="/img/""" + seed.value + """.gif" download>Save image</a>
             </body>
         </html>
     """)
