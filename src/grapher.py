@@ -52,7 +52,7 @@ def draw_graphic(p, panel):
     #    panel.create_line(p[i].x, p[i].y, p[i + 1].x, p[i + 1].y,
     #                      fill="red", tag="group")
 
-    draw(p, path)
+    draw(p, path, "graphic")
 
 
 # Creating graphic
