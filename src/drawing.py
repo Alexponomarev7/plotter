@@ -19,8 +19,8 @@ def draw(points, name, ptype):
     draw = ImageDraw.Draw(image)
 
     if ptype is "graphic":
-        draw.line(0, HEIGHT / 2, WIDTH, HEIGHT / 2, BLACK)
-        draw.line(WIDTH / 2, 0, WIDTH / 2, HEIGHT, BLACK)        
+        draw.line([0, HEIGHT / 2, WIDTH, HEIGHT / 2], BLACK)
+        draw.line([WIDTH / 2, 0, WIDTH / 2, HEIGHT], BLACK)        
     
     for i in range(len(points) - 1):
         # do the PIL image/draw (in memory) drawings
