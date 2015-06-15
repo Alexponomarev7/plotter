@@ -1,6 +1,11 @@
 $(document).ready(function() {
     
+    var GRAPH = 0, BEZIER = 1;
+
+    var state = -1;
+
     $("#graph").click(function() {
+        state = GRAPH;
         $(".input").hide();
         $("#functions").show();
         $("#graph_settings").show();
@@ -12,6 +17,7 @@ $(document).ready(function() {
     });
     
     $("#bezier").click(function() {
+        state = BEZIER;
         $(".input").hide();
         $("#points").show();
         
@@ -32,22 +38,28 @@ $(document).ready(function() {
         while($("#functions").find("tr").length < 1) {
             add_function(true);
         }
-        $("#functions").find("tr").each(function(index) {
+        var len = $("#functions").find("tr").each(function(index) {
             $(this).find("p").html("f<sub>" + index + "</sub>(x): ");
             $(this).find(":text").attr("name", "function_" + index);
-        });
+        }).length;
+        if(state == GRAPH) {
+            $("#num").attr("value", len);
+        }
     };
     
     var update_points = function() {
         while($("#points").find("tr").length < 2) {
             add_point(true);
         }
-        $("#points").find("tr").each(function(index) {
+        var len = $("#points").find("tr").each(function(index) {
             $(this).find("p.x").html("X<sub>" + index + "</sub>: ");
             $(this).find("p.y").html("Y<sub>" + index + "</sub>: ");
             $(this).find(".x:text").attr("name", "x_" + index);
             $(this).find(".y:text").attr("name", "y_" + index);
-        });
+        }).length;
+        if(state == BEZIER) {
+            $("#num").attr("value", len);
+        }
     };
     
     var add_function = function(not_update) {

@@ -26,32 +26,22 @@ task_type = form.getvalue("task_type")
 # max_x = float(form.getvalue("max_x"))
 # max_y = float(form.getvalue("max_y"))
 
-objects = []
+objects = [None] * int(form.getvalue("num_of_objects"))
 
 if task_type == "graph":
-    for Key in form.keys():
-        key = str(Key)
-        if key.startswith("function_"):
-            objects.append((int(key.split('_')[1]), str(form.getvalue(key))))
-    objects = list(map(lambda pair: pair[1], sorted(objects)))
+    for i in range(len(objects)):
+        objects[i] = str(form.getvalue('formula_' + str(i), '0'))
 elif task_type == "bezier":
-    xs = []
-    ys = []
-    for Key in form.keys():
-        key = str(Key)
-        if key.startswith("x_"):
-            xs.append((int(key.split('_')[1]), float(form.getvalue(key))))
-        if key.startswith("y_"):
-            ys.append((int(key.split('_')[1]), float(form.getvalue(key))))
-    xs.sort()
-    ys.sort()
-    objects = [point(xs[i][1], ys[i][1]) for i in range(min(len(xs), len(ys)))]
-    
+    for i in range(len(objects)):
+        objects[i] = point(float(form.getvalue('x_' + str(i), '0')), float(form.getvalue('y_' + str(i), '0')))
+
+print(objects, file=sys.stderr)
+
 if seed is not None:
     if task_type == "graph":
-        x_pos = float(form.getvalue("_x_pos"))
-        y_pos = float(form.getvalue("_y_pos"))
-        scale = float(form.getvalue("_scale"))
+        x_pos = float(form.getvalue("x_pos", 0))
+        y_pos = float(form.getvalue("y_pos", 0))
+        scale = float(form.getvalue("scale", 1))
         pl.graph(seed.value, objects, x_pos, y_pos, scale)
     elif task_type == "bezier":
         pl.bezier(seed.value, objects)

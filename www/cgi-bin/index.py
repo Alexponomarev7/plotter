@@ -17,7 +17,8 @@ print("""<!DOCTYPE html>
             <script src="/js/index.js"></script>
             <h1>XY Plotter v1.0</h1>
             <h2>Send a request: </h2>
-            <form action="/cgi-bin/preview.py">
+            <form action="/cgi-bin/preview.py" method="post">
+                <input id="num" type="hidden" name="num_of_objects" value="0" />
                 <table id="functions" class="input" hidden>
                 </table>
                 <table id="points" class="input" hidden>
@@ -28,19 +29,19 @@ print("""<!DOCTYPE html>
                            X coordinate in center:
                         </td>
                         <td>
-                            <input type="text" name="_x_pos" value="0" />
+                            <input type="text" name="x_pos" value="0" />
                         </td>
                         <td>
                             Y coordinate in center:
                         </td>
                         <td>
-                            <input type="text" name="_y_pos" value="0" />
+                            <input type="text" name="y_pos" value="0" />
                         </td>
                         <td>
                             Scale, cm:
                         </td>
                         <td>
-                            <input type="text" name="_scale" value="1" />
+                            <input type="text" name="scale" value="1" />
                         </td>
                     </tr>
                 </table>
