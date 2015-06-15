@@ -9,8 +9,8 @@ sys.path.append(path.sep.join(path.abspath(__file__).split(path.sep)[:-3] + ['sr
 import grapher
 import bezier as bz
 
-def graph(name, function):
-    grapher.main(name, function[0])
+def graph(name, function, x_pos, y_pos, scale):
+    grapher.main(name, function[0], x_pos, y_pos, scale)
 
 
 def bezier(name, p_list):
