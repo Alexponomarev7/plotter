@@ -25,28 +25,22 @@ print("""<!DOCTYPE html>
                 <table>
                     <tr>
                         <td>
-                            Min X:
+                            X position, %:
                         </td>
                         <td>
-                            <input type="text" name="min_x" value="-10" />
+                            <input type="text" name="x_pos" value="50" />
                         </td>
                         <td>
-                            Min Y:
+                            Y position, %:
                         </td>
                         <td>
-                            <input type="text" name="min_y" value="-10" />
+                            <input type="text" name="min_y" value="50" />
                         </td>
                         <td>
-                            Max X:
+                            Scale, cm:
                         </td>
                         <td>
-                            <input type="text" name="max_x" value="10" />
-                        </td>
-                        <td>
-                            Max Y:
-                        </td>
-                        <td>
-                            <input type="text" name="max_y" value="10" />
+                            <input type="text" name="scale" value="1" />
                         </td>
                     </tr>
                 </table>
