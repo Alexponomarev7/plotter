@@ -9,7 +9,7 @@ CENTER = HEIGHT // 2
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
-    
+SCALE = 100
 
 # drawing GIF image
 def draw(points, name, ptype):
@@ -20,8 +20,39 @@ def draw(points, name, ptype):
 
     if ptype is "graphic":
         draw.line([0, HEIGHT / 2, WIDTH, HEIGHT / 2], BLACK)
-        draw.line([WIDTH / 2, 0, WIDTH / 2, HEIGHT], BLACK)        
-    
+        draw.line([WIDTH / 2, 0, WIDTH / 2, HEIGHT], BLACK)  
+        
+        nums = (WIDTH / 2)
+        n = SCALE
+        k = 1
+        koeff = 1
+        
+        if nums // (SCALE / k) > 10:
+            while nums // (SCALE / k) > 10:
+                k /= 2
+                koef *= 2
+                if nums // (SCALE / k) <= 10:
+                    break
+                k /= 5
+                koef *= 2
+        else:
+            while nums // (SCALE / k) < 10:
+                k *= 2
+                if nums // (SCALE / k) >= 10:
+                    break      
+                k *= 5
+        
+        step = SCALE / k
+        count = nums // (SCALE / k)
+        for i in range(int(step * koeff), (WIDTH // 2) * koeff, int(step * koeff)):
+            new = i / koeff
+            draw.line([new + WIDTH / 2,
+                       (HEIGHT / 2) - 5,
+                       new + WIDTH / 2,
+                       (HEIGHT / 2) + 5], BLACK)
+            
+                
+                
     for i in range(len(points) - 1):
         # do the PIL image/draw (in memory) drawings
         draw.line([points[i].x, points[i].y,
@@ -30,3 +61,4 @@ def draw(points, name, ptype):
     # PIL image can be saved as .png .jpg .gif or .bmp file (among others)
     filename = "../www/img/" + name + ".gif"
     image.save(filename)
+    

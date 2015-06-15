@@ -4,11 +4,10 @@
 import tkinter
 import math
 from point import point
-from drawing import draw
+from drawing import draw, SCALE
 
 MAX_WIDTHSIZE = 1485     # 210 mm
 MAX_HEIGHTSIZE = 1050    # 297 mm
-SCALE = 71
 PRECISION = 10
 path = None
 
@@ -90,3 +89,4 @@ def main(name, function, x_pos, y_pos, scale):
     # root.bind('<i>', plus)   # Increase
     # root.bind('<d>', minus)  # decrease
     # root.mainloop()
+
