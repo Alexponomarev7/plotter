@@ -39,8 +39,7 @@ def minus(event):
 
 # Parsing function
 def func(x, function):
-    function.replace('x', str(x))
-    return eval(function)
+    return eval(function, {'x': x})
 
 
 # Drawing graphic
@@ -70,9 +69,10 @@ def create_graphic(panel, function, x_pos, y_pos):
 
 
 # Creating GUI
-def main(name, function, x_pos, y_pos, scale):
+def main(name, expr, x_pos, y_pos, scale):
     global path
     path = name
+    function = compile(expr, '<string>', 'eval')
     
     # root = tkinter.Tk()
     # panel = tkinter.Canvas(root, width=MAX_WIDTHSIZE, height=MAX_HEIGHTSIZE)
@@ -89,4 +89,6 @@ def main(name, function, x_pos, y_pos, scale):
     # root.bind('<i>', plus)   # Increase
     # root.bind('<d>', minus)  # decrease
     # root.mainloop()
+    
+main('s', 'x', 0, 0, 0)
 

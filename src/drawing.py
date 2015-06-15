@@ -17,7 +17,7 @@ def draw(points, name, ptype):
     # memory only, not visible
     image = Image.new("RGB", (WIDTH, HEIGHT), WHITE)
     draw = ImageDraw.Draw(image)
-
+    
     if ptype is "graphic":
         draw.line([0, HEIGHT / 2, WIDTH, HEIGHT / 2], BLACK)
         draw.line([WIDTH / 2, 0, WIDTH / 2, HEIGHT], BLACK)  
@@ -30,11 +30,11 @@ def draw(points, name, ptype):
         if nums // (SCALE / k) > 10:
             while nums // (SCALE / k) > 10:
                 k /= 2
-                koef *= 2
+                koeff *= 2
                 if nums // (SCALE / k) <= 10:
                     break
                 k /= 5
-                koef *= 2
+                koeff *= 2
         else:
             while nums // (SCALE / k) < 10:
                 k *= 2
@@ -50,7 +50,21 @@ def draw(points, name, ptype):
                        (HEIGHT / 2) - 5,
                        new + WIDTH / 2,
                        (HEIGHT / 2) + 5], BLACK)
-            
+            draw.line([-new + WIDTH / 2,
+                       (HEIGHT / 2) - 5,
+                       -new + WIDTH / 2,
+                       (HEIGHT / 2) + 5], BLACK) 
+        
+        for i in range(int(step * koeff), (HEIGHT // 2) * koeff, int(step * koeff)):
+            new = i / koeff
+            draw.line([WIDTH / 2 - 5,
+                       (HEIGHT / 2) + new,
+                       WIDTH / 2 + 5,
+                       (HEIGHT / 2) + new], BLACK)
+            draw.line([WIDTH / 2 - 5,
+                       (HEIGHT / 2) - new,
+                       WIDTH / 2 + 5,
+                       (HEIGHT / 2) - new], BLACK)
                 
                 
     for i in range(len(points) - 1):
