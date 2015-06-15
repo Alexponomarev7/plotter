@@ -45,13 +45,13 @@ elif task_type == "bezier":
             ys.append((int(key.split('_')[1]), float(form.getvalue(key))))
     xs.sort()
     ys.sort()
-    objects = [point(xs[i], ys[i]) for i in range(min(len(xs), len(ys)))]
+    objects = [(xs[i], ys[i]) for i in range(min(len(xs), len(ys)))]
     
 if seed is not None:
     if task_type == "graph":
-        pl.graph(seed.value, objects, min_x, max_x, min_y, max_y)
+        pl.graph(seed.value, objects) #, min_x, max_x, min_y, max_y)
     elif task_type == "bezier":
-        pl.bezier(seed.value, objects, min_x, max_x, min_y, max_y)
+        pl.bezier(seed.value, objects) #, min_x, max_x, min_y, max_y)
 
 if seed is None:
     print("Set-cookie: seed=", time.time(), sep='')

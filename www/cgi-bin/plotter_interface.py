@@ -10,7 +10,7 @@ import grapher
 import bezier
 
 def graph(name, function):
-    grapher.main(name, function)
+    grapher.main(name, function[0])
 
 
 def bezier(name, p_list):
