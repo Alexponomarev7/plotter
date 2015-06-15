@@ -31,16 +31,13 @@ objects = [None] * int(form.getvalue("num_of_objects"))
 errors = False
 try:
     if task_type == "graph":
-<<<<<<< HEAD
         for i in range(len(objects)):
             objects[i] = str(form.getvalue('function_' + str(i), '0'))
-=======
-        x_pos = float(form.getvalue("x_pos", 0))
-        y_pos = float(form.getvalue("y_pos", 0))
-        scale = int(form.getvalue("scale", 100))
-        print(x_pos, y_pos, scale, file=sys.stderr)
-        pl.graph(seed.value, objects, x_pos, y_pos, scale)
->>>>>>> 3593dc69a343931c75ea4bb5407e37ab39d697de
+            x_pos = float(form.getvalue("x_pos", 0))
+            y_pos = float(form.getvalue("y_pos", 0))
+            scale = int(form.getvalue("scale", 100))
+            # print(x_pos, y_pos, scale, file=sys.stderr)
+            pl.graph(seed.value, objects, x_pos, y_pos, scale)
     elif task_type == "bezier":
         for i in range(len(objects)):
             objects[i] = point(float(form.getvalue('x_' + str(i), '0')), float(form.getvalue('y_' + str(i), '0')))
