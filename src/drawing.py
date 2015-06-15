@@ -2,6 +2,7 @@
 # Distributed under the terms of the MIT License.
 
 from PIL import Image, ImageDraw
+from getaxes import get
 
 WIDTH = 1485
 HEIGHT = 1050
@@ -9,10 +10,9 @@ CENTER = HEIGHT // 2
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
-SCALE = 100
 
 # drawing GIF image
-def draw(points, name, ptype):
+def draw(points, name, ptype, SCALE):
     # PIL create an empty image and draw object to draw on
     # memory only, not visible
     image = Image.new("RGB", (WIDTH, HEIGHT), WHITE)
@@ -22,29 +22,10 @@ def draw(points, name, ptype):
         draw.line([0, HEIGHT / 2, WIDTH, HEIGHT / 2], BLACK)
         draw.line([WIDTH / 2, 0, WIDTH / 2, HEIGHT], BLACK)  
         
-        nums = (WIDTH / 2)
-        n = SCALE
-        k = 1
-        koeff = 1
+        step, koeff = get(WIDTH, SCALE)
         
-        if nums // (SCALE / k) > 10:
-            while nums // (SCALE / k) > 10:
-                k /= 2
-                koeff *= 2
-                if nums // (SCALE / k) <= 10:
-                    break
-                k /= 5
-                koeff *= 2
-        else:
-            while nums // (SCALE / k) < 10:
-                k *= 2
-                if nums // (SCALE / k) >= 10:
-                    break      
-                k *= 5
         
-        step = SCALE / k
-        count = nums // (SCALE / k)
-        for i in range(int(step * koeff), (WIDTH // 2) * koeff, int(step * koeff)):
+        for i in range(step, (WIDTH // 2) * koeff, step):
             new = i / koeff
             draw.line([new + WIDTH / 2,
                        (HEIGHT / 2) - 5,
@@ -55,7 +36,7 @@ def draw(points, name, ptype):
                        -new + WIDTH / 2,
                        (HEIGHT / 2) + 5], BLACK) 
         
-        for i in range(int(step * koeff), (HEIGHT // 2) * koeff, int(step * koeff)):
+        for i in range(step, (HEIGHT // 2) * koeff, step):
             new = i / koeff
             draw.line([WIDTH / 2 - 5,
                        (HEIGHT / 2) + new,

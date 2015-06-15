@@ -41,7 +41,7 @@ if seed is not None:
     if task_type == "graph":
         x_pos = float(form.getvalue("x_pos", 0))
         y_pos = float(form.getvalue("y_pos", 0))
-        scale = float(form.getvalue("scale", 1))
+        scale = int(form.getvalue("scale", 100))
         print(x_pos, y_pos, scale, file=sys.stderr)
         pl.graph(seed.value, objects, x_pos, y_pos, scale)
     elif task_type == "bezier":

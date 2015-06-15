@@ -38,10 +38,10 @@ print("""<!DOCTYPE html>
                             <input type="text" name="y_pos" value="0" />
                         </td>
                         <td>
-                            Scale, cm:
+                            Scale, px:
                         </td>
                         <td>
-                            <input type="text" name="scale" value="1" />
+                            <input type="text" name="scale" value="100" />
                         </td>
                     </tr>
                 </table>
