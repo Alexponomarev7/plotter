@@ -48,9 +48,9 @@ def func(x, function):
 def draw_graphic(p, panel):
     global path
     
-    for i in range(len(p) - 1):
-        panel.create_line(p[i].x, p[i].y, p[i + 1].x, p[i + 1].y,
-                          fill="red", tag="group")
+    # for i in range(len(p) - 1):
+    #    panel.create_line(p[i].x, p[i].y, p[i + 1].x, p[i + 1].y,
+    #                      fill="red", tag="group")
 
     draw(p, path)
 
@@ -75,17 +75,17 @@ def main(name, function):
     global path
     path = name
     
-    root = tkinter.Tk()
-    panel = tkinter.Canvas(root, width=MAX_WIDTHSIZE, height=MAX_HEIGHTSIZE)
-    panel.grid(row=0, column=0)
+    # root = tkinter.Tk()
+    # panel = tkinter.Canvas(root, width=MAX_WIDTHSIZE, height=MAX_HEIGHTSIZE)
+    # panel.grid(row=0, column=0)
     
     graphic = []
-    panel.create_line(MAX_WIDTHSIZE / 2, 0, MAX_WIDTHSIZE / 2, MAX_HEIGHTSIZE,
-                      fill="gray50")
-    panel.create_line(0, MAX_HEIGHTSIZE / 2, MAX_WIDTHSIZE, MAX_HEIGHTSIZE / 2,
-                      fill="gray50")
+    # panel.create_line(MAX_WIDTHSIZE / 2, 0, MAX_WIDTHSIZE / 2, MAX_HEIGHTSIZE,
+    #                  fill="gray50")
+    # panel.create_line(0, MAX_HEIGHTSIZE / 2, MAX_WIDTHSIZE, MAX_HEIGHTSIZE / 2,
+    #                  fill="gray50")
     create_graphic(panel, function)
     
-    root.bind('<i>', plus)   # Increase
-    root.bind('<d>', minus)  # decrease
-    root.mainloop()
+    # root.bind('<i>', plus)   # Increase
+    # root.bind('<d>', minus)  # decrease
+    # root.mainloop()
