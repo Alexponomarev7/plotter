@@ -56,7 +56,7 @@ def draw_graphic(p, panel):
 
 
 # Creating graphic
-def create_graphic(panel, function):
+def create_graphic(panel, function, x_pos, y_pos):
     graphic = []
     for i in range(-250 * PRECISION, 250 * PRECISION + 1):
         j = i / PRECISION
@@ -71,7 +71,7 @@ def create_graphic(panel, function):
 
 
 # Creating GUI
-def main(name, function):
+def main(name, function, x_pos, y_pos, scale):
     global path
     path = name
     
@@ -85,7 +85,7 @@ def main(name, function):
     # panel.create_line(0, MAX_HEIGHTSIZE / 2, MAX_WIDTHSIZE, MAX_HEIGHTSIZE / 2,
     #                  fill="gray50")
     panel = None
-    create_graphic(panel, function)
+    create_graphic(panel, function, x_pos, y_pos)
     
     # root.bind('<i>', plus)   # Increase
     # root.bind('<d>', minus)  # decrease
