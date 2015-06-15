@@ -25,3 +25,4 @@ def main(name, p):
     draw(points, name, "bezier")
     
     # root.mainloop()
+    
