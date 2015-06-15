@@ -20,4 +20,4 @@ def get(WIDTH, SCALE):
         
     step = int((SCALE / k) * koeff)
     
-    return step, koeff
+    return step, koeff, k
