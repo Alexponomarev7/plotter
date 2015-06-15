@@ -3,7 +3,8 @@ $(document).ready(function() {
     $("#graph").click(function() {
         $(".input").hide();
         $("#functions").show();
-        
+        $("#graph_settings").show();
+         
         update_functions();
         
         $("#add_btn").show().text("Add function").off("click").click(add_function);

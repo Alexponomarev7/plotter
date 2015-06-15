@@ -22,7 +22,7 @@ print("""<!DOCTYPE html>
                 </table>
                 <table id="points" class="input" hidden>
                 </table>
-                <table>
+                <table id="graph_settings" class="input" hidden>
                     <tr>
                         <td>
                             X position, %:
