@@ -30,7 +30,7 @@ objects = [None] * int(form.getvalue("num_of_objects"))
 
 if task_type == "graph":
     for i in range(len(objects)):
-        objects[i] = str(form.getvalue('formula_' + str(i), '0'))
+        objects[i] = str(form.getvalue('function_' + str(i), '0'))
 elif task_type == "bezier":
     for i in range(len(objects)):
         objects[i] = point(float(form.getvalue('x_' + str(i), '0')), float(form.getvalue('y_' + str(i), '0')))
@@ -42,6 +42,7 @@ if seed is not None:
         x_pos = float(form.getvalue("x_pos", 0))
         y_pos = float(form.getvalue("y_pos", 0))
         scale = float(form.getvalue("scale", 1))
+        print(x_pos, y_pos, scale, file=sys.stderr)
         pl.graph(seed.value, objects, x_pos, y_pos, scale)
     elif task_type == "bezier":
         pl.bezier(seed.value, objects)
