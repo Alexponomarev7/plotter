@@ -23,5 +23,5 @@ def draw(points, name):
                    points[i + 1].x, points[i + 1].y], RED)
 
     # PIL image can be saved as .png .jpg .gif or .bmp file (among others)
-    filename = name + ".gif"
+    filename = "../www/img/" + name + ".gif"
     image.save(filename)

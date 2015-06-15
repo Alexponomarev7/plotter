@@ -10,7 +10,7 @@ MAX_WIDTHSIZE = 500     # 210 mm
 MAX_HEIGHTSIZE = 500    # 297 mm
 SCALE = 71
 PRECISION = 10
-
+path = None
 
 def increase():
     global SCALE
@@ -46,11 +46,13 @@ def func(x, function):
 
 # Drawing graphic
 def draw_graphic(p, panel):
+    global path
+    
     for i in range(len(p) - 1):
         panel.create_line(p[i].x, p[i].y, p[i + 1].x, p[i + 1].y,
                           fill="red", tag="group")
 
-    draw(p, "test")
+    draw(p, path)
 
 
 # Creating graphic
@@ -67,19 +69,23 @@ def create_graphic(panel, function):
  
     draw_graphic(graphic, panel)
 
+
 # Creating GUI
-root = tkinter.Tk()
-panel = tkinter.Canvas(root, width=MAX_WIDTHSIZE, height=MAX_HEIGHTSIZE)
-panel.grid(row=0, column=0)
-
-graphic = []
-function = input('y = ')
-panel.create_line(MAX_WIDTHSIZE / 2, 0, MAX_WIDTHSIZE / 2, MAX_HEIGHTSIZE,
-                  fill="gray50")
-panel.create_line(0, MAX_HEIGHTSIZE / 2, MAX_WIDTHSIZE, MAX_HEIGHTSIZE / 2,
-                  fill="gray50")
-create_graphic(panel, function)
-
-root.bind('<i>', plus)   # Increase
-root.bind('<d>', minus)  # decrease
-root.mainloop()
+def main(name, function):
+    global path
+    path = name
+    
+    root = tkinter.Tk()
+    panel = tkinter.Canvas(root, width=MAX_WIDTHSIZE, height=MAX_HEIGHTSIZE)
+    panel.grid(row=0, column=0)
+    
+    graphic = []
+    panel.create_line(MAX_WIDTHSIZE / 2, 0, MAX_WIDTHSIZE / 2, MAX_HEIGHTSIZE,
+                      fill="gray50")
+    panel.create_line(0, MAX_HEIGHTSIZE / 2, MAX_WIDTHSIZE, MAX_HEIGHTSIZE / 2,
+                      fill="gray50")
+    create_graphic(panel, function)
+    
+    root.bind('<i>', plus)   # Increase
+    root.bind('<d>', minus)  # decrease
+    root.mainloop()
