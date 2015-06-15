@@ -21,10 +21,10 @@ seed = cookie.get("seed")
 form = cgi.FieldStorage()
 
 task_type = form.getvalue("task_type")
-min_x = float(form.getvalue("min_x"))
-min_y = float(form.getvalue("min_y"))
-max_x = float(form.getvalue("max_x"))
-max_y = float(form.getvalue("max_y"))
+# min_x = float(form.getvalue("min_x"))
+# min_y = float(form.getvalue("min_y"))
+# max_x = float(form.getvalue("max_x"))
+# max_y = float(form.getvalue("max_y"))
 
 objects = []
 
@@ -45,13 +45,16 @@ elif task_type == "bezier":
             ys.append((int(key.split('_')[1]), float(form.getvalue(key))))
     xs.sort()
     ys.sort()
-    objects = [(xs[i], ys[i]) for i in range(min(len(xs), len(ys)))]
+    objects = [point(xs[i][1], ys[i][1]) for i in range(min(len(xs), len(ys)))]
     
 if seed is not None:
     if task_type == "graph":
-        pl.graph(seed.value, objects) #, min_x, max_x, min_y, max_y)
+        x_pos = float(form.getvalue("x_pos"))
+        y_pos = float(form.getvalue("y_pos"))
+        scale = float(form.getvalue("scale"))
+        pl.graph(seed.value, objects)
     elif task_type == "bezier":
-        pl.bezier(seed.value, objects) #, min_x, max_x, min_y, max_y)
+        pl.bezier(seed.value, objects)
 
 if seed is None:
     print("Set-cookie: seed=", time.time(), sep='')
