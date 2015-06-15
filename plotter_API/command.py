@@ -3,14 +3,14 @@
 # Class command for creating code for API
 
 
-types = ['pencilUp',
-         'pencilDown',
-         'moveTo',
-         'drawOval',
-         'drawRectangle',
-         'drawPolygon',
-         'print'
-         'pause']
+types = [   'api.begin', 
+            'api.end', 
+            'api.draw_line',
+            'api.draw_polygon', 
+            'api.draw_ellipse', 
+            'api.draw_polyline', 
+            'api.draw_rect', 
+            'api.draw_text']
 
 
 class command:
