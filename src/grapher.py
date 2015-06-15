@@ -84,6 +84,7 @@ def main(name, function):
     #                  fill="gray50")
     # panel.create_line(0, MAX_HEIGHTSIZE / 2, MAX_WIDTHSIZE, MAX_HEIGHTSIZE / 2,
     #                  fill="gray50")
+    panel = None
     create_graphic(panel, function)
     
     # root.bind('<i>', plus)   # Increase
