@@ -25,22 +25,22 @@ print("""<!DOCTYPE html>
                 <table id="graph_settings" class="input" hidden>
                     <tr>
                         <td>
-                            X position, %:
+                           X coordinate in center:
                         </td>
                         <td>
-                            <input type="text" name="x_pos" value="50" />
+                            <input type="text" name="_x_pos" value="0" />
                         </td>
                         <td>
-                            Y position, %:
+                            Y coordinate in center:
                         </td>
                         <td>
-                            <input type="text" name="min_y" value="50" />
+                            <input type="text" name="_y_pos" value="0" />
                         </td>
                         <td>
                             Scale, cm:
                         </td>
                         <td>
-                            <input type="text" name="scale" value="1" />
+                            <input type="text" name="_scale" value="1" />
                         </td>
                     </tr>
                 </table>
