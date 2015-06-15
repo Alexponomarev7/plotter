@@ -37,12 +37,16 @@ def main():
     while is_locked():
         time.sleep(1)
     lock()
-    log("generating cnc")
-    gen_cnc()
-    log("sending cnc")
-    send_cnc()
-    log("done")
-    unlock()
-    log("stopped")
+    try:
+        log("generating cnc")
+        gen_cnc()
+        log("sending cnc")
+        send_cnc()
+        log("done")
+    except:
+        print(sys.exc_info()[0])
+    finally:
+        unlock()
+        log("stopped")
     
 main()

@@ -86,9 +86,12 @@ else:
                 <h1>Preview</h1>
                 <p>Number of formulas: """ + str(len(objects)) + """</p>
                 <img width="800" src="/img/""" + seed.value + """.gif" />
-                <form action="/cgi-bin/print.py">
-                    <button>Print</button>
-                </form>
+                <button onclick="window.location.href='/cgi-bin/print.py'">
+                    Print
+                </button>
+                <button onClick="history.go(-1); return false;">
+                    Go back
+                </button>
             </body>
         </html>
     """)
