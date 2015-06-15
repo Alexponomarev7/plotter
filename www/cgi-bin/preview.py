@@ -45,7 +45,7 @@ elif task_type == "bezier":
             ys.append((int(key.split('_')[1]), float(form.getvalue(key))))
     xs.sort()
     ys.sort()
-    objects = [(xs[i], ys[i]) for i in range(min(len(xs), len(ys)))]
+    objects = [point(xs[i], ys[i]) for i in range(min(len(xs), len(ys)))]
     
 if seed is not None:
     if task_type == "graph":
@@ -82,7 +82,7 @@ else:
             <body>
                 <h1>Preview</h1>
                 <p>Number of formulas: """ + str(len(objects)) + """</p>
-                <img src="/img/""" + seed.value + """.gif" />
+                <img width="800" src="/img/""" + seed.value + """.gif" />
                 <form action="/cgi-bin/print.py">
                     <button>Print</button>
                 </form>
