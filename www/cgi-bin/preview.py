@@ -19,6 +19,8 @@ from point import *
 cookie = http.cookies.SimpleCookie(os.environ.get("HTTP_COOKIE"))
 seed = cookie.get("seed")
 
+time_start = time.time()
+
 form = cgi.FieldStorage()
 
 task_type = form.getvalue("task_type")
@@ -61,6 +63,8 @@ except Exception as e:
     print(traceback.format_exc(), file=sys.stderr)
     errors = True
 
+time_end = time.time()
+
 if seed is None:
     print("Set-cookie: seed=", time.time(), sep='')
 
@@ -102,6 +106,7 @@ elif errors:
         </html>
     """)
 else:
+    
     print("""<!DOCTYPE html>
         <html>
             <head>
@@ -120,6 +125,7 @@ else:
                     Go back
                 </button>
                 <a href="/img/""" + seed.value + """.gif" download>Save image</a>
+                <p>Time: """ + str(time_end - time_start) + """</p>
             </body>
         </html>
     """)
