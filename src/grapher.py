@@ -3,10 +3,10 @@
 
 import tkinter
 from math import sqrt, sin, cos
-from math import atan as ctg
 from math import tan as tg
 from point import point
 from drawing import draw
+import sys, traceback
 
 WIDTH = 1485     # 210 mm
 HEIGHT = 1050    # 297 mm
@@ -14,7 +14,6 @@ PRECISION = 10
 
 # Parsing function
 def func(x, function):
-    function.replace('x', str(x))
     return eval(function)
 
 # Creating graphic
@@ -28,7 +27,10 @@ def create_graphic(function, x_pos, y_pos, SCALE, path):
             p = point(j * SCALE + WIDTH / 2,
                 -func(j, function) * SCALE + HEIGHT / 2)
             graphic.append(p)
+        except NameError:
+            raise
         except:
+            print(traceback.format_exc(), file=sys.stderr)
             continue
  
     draw(graphic, path, "graphic", SCALE)
