@@ -4,9 +4,8 @@ import sys
 import os
 import time
 
-sys.path.append("/".join(os.path.abspath(__file__).split("/")[:-3] + ["driver"]))
-
-import api
+from lib.driver import api
+from lib.graph import point
 
 seed = sys.argv[1]
 
@@ -37,6 +36,7 @@ def send_cnc():
     
 def main():
     log("started")
+    log(sys.path)
     log("wait while unlocking...")
     while is_locked():
         time.sleep(1)

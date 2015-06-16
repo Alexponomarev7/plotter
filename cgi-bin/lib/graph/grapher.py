@@ -4,8 +4,8 @@
 import tkinter
 from math import sqrt, sin, cos, pi
 from math import tan as tg
-from point import point
-from drawing import draw
+from .point import point
+from .drawing import draw
 import sys, traceback
 
 CHECK = 10000      # Checking for discontinue

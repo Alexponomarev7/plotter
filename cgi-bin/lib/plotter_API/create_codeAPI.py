@@ -3,7 +3,7 @@
 
 
 def writingcode(commands, path):
-    f_w = open("../www/tasks/" + path + ".py", 'w')
+    f_w = open("tasks/" + path + ".py", 'w')
 
     print('pencilUp()', file=f_w)
     for i in commands:

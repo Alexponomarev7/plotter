@@ -1,13 +1,8 @@
 #! /usr/bin/env python3
 
-import sys
-from os import path
-sys.path.append(path.sep.join(path.abspath(__file__).split(path.sep)[:-2] + ['src']))
-
 from numpy import *
-from point import *
-import driver as drv
-import glyphs as gl
+from ..graph.point import point
+from . import driver as drv, glyphs as gl
 
 def R(phi):
     return matrix([[cos(phi), -sin(phi), 0],

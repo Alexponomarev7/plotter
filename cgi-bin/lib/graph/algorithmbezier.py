@@ -1,4 +1,4 @@
-from point import point
+from .point import point
 
 # Vector's radius
 def sumspoint(a, b, t):
