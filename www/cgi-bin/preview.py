@@ -5,6 +5,7 @@ import os
 import sys
 import http.cookies
 import time
+import traceback
 
 import plotter_interface as pl
 
@@ -57,6 +58,7 @@ try:
 except Exception as e:
     print(type(e), file=sys.stderr)
     print(e, file=sys.stderr)
+    print(traceback.format_exc(), file=sys.stderr)
     errors = True
 
 if seed is None:
