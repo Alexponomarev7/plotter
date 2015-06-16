@@ -12,7 +12,7 @@ RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 
 # drawing GIF image
-def draw(points, name, ptype, SCALE):
+def draw(points, name, ptype, SCALE = None):
     # PIL create an empty image and draw object to draw on
     # memory only, not visible
     image = Image.new("RGB", (WIDTH, HEIGHT), WHITE)
