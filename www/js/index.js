@@ -40,7 +40,7 @@ $(document).ready(function() {
         }
         var len = $("#functions").find("tr").each(function(index) {
             $(this).find("p").html("f<sub>" + index + "</sub>(x): ");
-            $(this).find(":text").attr("name", "function_" + index);
+            $(this).find(":text").attr("name", "function_" + index).attr("placeholder", "0");
         }).length;
         if(state == GRAPH) {
             $("#num").attr("value", len);
@@ -54,8 +54,8 @@ $(document).ready(function() {
         var len = $("#points").find("tr").each(function(index) {
             $(this).find("p.x").html("X<sub>" + index + "</sub>: ");
             $(this).find("p.y").html("Y<sub>" + index + "</sub>: ");
-            $(this).find(".x:text").attr("name", "x_" + index);
-            $(this).find(".y:text").attr("name", "y_" + index);
+            $(this).find(".x:text").attr("name", "x_" + index).attr("placeholder", "0");
+            $(this).find(".y:text").attr("name", "y_" + index).attr("placeholder", "0");
         }).length;
         if(state == BEZIER) {
             $("#num").attr("value", len);
