@@ -1,7 +1,7 @@
 # Copyright (c) Alex Ponomarev.
 # Distributed under the terms of the MIT License.
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 from getaxes import get
 
 WIDTH = 1485
@@ -13,6 +13,7 @@ BLACK = (0, 0, 0)
 
 # drawing GIF image
 def draw(points, name, ptype, SCALE = None):
+    font = ImageFont.truetype(font="Arial", size=20)
     # PIL create an empty image and draw object to draw on
     # memory only, not visible
     image = Image.new("RGB", (WIDTH, HEIGHT), WHITE)
@@ -27,13 +28,12 @@ def draw(points, name, ptype, SCALE = None):
         x = 1
         for i in range(step, (WIDTH // 2) * koeff, step):
             new = i / koeff
-            
-            draw.text((new + WIDTH / 2, (HEIGHT / 2) + 5), str(x / k), BLACK)
+            draw.text((new + WIDTH / 2, (HEIGHT / 2) + 5), str(x / k), BLACK, font=font)
             draw.line([new + WIDTH / 2,
                        (HEIGHT / 2) - 5,
                        new + WIDTH / 2,
                        (HEIGHT / 2) + 5], BLACK)
-            draw.text((-new + WIDTH / 2, (HEIGHT / 2) + 5), str(-x / k), BLACK)            
+            draw.text((-new + WIDTH / 2, (HEIGHT / 2) + 5), str(-x / k), BLACK, font=font)            
             draw.line([-new + WIDTH / 2,
                        (HEIGHT / 2) - 5,
                        -new + WIDTH / 2,
@@ -43,12 +43,12 @@ def draw(points, name, ptype, SCALE = None):
         y = 1
         for i in range(step, (HEIGHT // 2) * koeff, step):
             new = i / koeff
-            draw.text((WIDTH / 2 + 5, (HEIGHT / 2) + new), str(-y / k), BLACK)            
+            draw.text((WIDTH / 2 + 5, (HEIGHT / 2) + new), str(-y / k), BLACK, font=font)            
             draw.line([WIDTH / 2 - 5,
                        (HEIGHT / 2) + new,
                        WIDTH / 2 + 5,
                        (HEIGHT / 2) + new], BLACK)
-            draw.text((WIDTH / 2 + 5, (HEIGHT / 2) - new), str(y / k), BLACK)                        
+            draw.text((WIDTH / 2 + 5, (HEIGHT / 2) - new), str(y / k), BLACK, font=font)                        
             draw.line([WIDTH / 2 - 5,
                        (HEIGHT / 2) - new,
                        WIDTH / 2 + 5,
