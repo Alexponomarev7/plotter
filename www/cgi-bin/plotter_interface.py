@@ -4,7 +4,10 @@ from subprocess import *
 import sys
 from os import path
 
-from lib.graph import grapher, bezier as bz
+sys.path.append(path.sep.join(path.abspath(__file__).split(path.sep)[:-3] + ['src']))
+
+import grapher
+import bezier as bz
 
 def graph(name, function, x_pos, y_pos, scale):
     grapher.main(name, function[0], x_pos, y_pos, scale)

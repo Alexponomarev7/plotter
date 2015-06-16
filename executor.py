@@ -4,9 +4,6 @@ import sys
 import os
 import time
 
-from lib.driver import api
-from lib.graph import point
-
 seed = sys.argv[1]
 
 def log(string):
@@ -27,7 +24,7 @@ def gen_cnc():
     filename = "tasks/" + seed + ".py"
     with open(filename, 'r') as f:
         code = compile(f.read(), filename, "exec")
-        exec(code)
+        exec(code, {'driver_dir': "/".join(os.path.abspath(__file__).split("/")[:-3] + ['driver'])})
         
 
 def send_cnc():
@@ -36,7 +33,6 @@ def send_cnc():
     
 def main():
     log("started")
-    log(sys.path)
     log("wait while unlocking...")
     while is_locked():
         time.sleep(1)

@@ -1,7 +1,7 @@
 from tkinter import *
-from .point import point 
-from .algorithmbezier import bezier, algorithmbezier
-from .drawing import draw
+from point import point 
+from algorithmbezier import bezier, algorithmbezier
+from drawing import draw
 
 
 def main(name, p):

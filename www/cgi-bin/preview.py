@@ -7,8 +7,14 @@ import http.cookies
 import time
 import traceback
 
-from lib.graph.point import point
 import plotter_interface as pl
+
+from os import path
+
+# print(__file__, file=sys.stderr)
+
+sys.path.append(path.sep.join(path.abspath(__file__).split(path.sep)[:-3] + ['src']))
+from point import *
 
 cookie = http.cookies.SimpleCookie(os.environ.get("HTTP_COOKIE"))
 seed = cookie.get("seed")

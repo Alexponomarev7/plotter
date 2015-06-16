@@ -37,7 +37,7 @@ print("""<!DOCTYPE html>
         <body>
             <h1>Printing now...</h1>""")
 
-subprocess.Popen([sys.executable, "cgi-bin/executor.py", seed])
+subprocess.Popen([sys.executable, "../executor.py", seed])
 
 print('<a href="/">Home</a>')
      

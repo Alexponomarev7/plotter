@@ -1,6 +1,11 @@
 #! /usr/bin/env python3
 
-from ..graph.point import point
+import sys
+from os import path
+
+sys.path.append(path.sep.join(path.abspath(__file__).split(path.sep)[:-2] + ['src']))
+
+from point import *
 
 fout = None
 UP = False
@@ -46,7 +51,7 @@ def line_to(x, y, in_polygon=False):
 
 def move_to(x, y):
     pencil_up()
-    print('G00', 'X%.8f' % (x * kx()), 'Y%.8f' % (y * ky()), file=fout)
+    print('G01', 'X%.8f' % (x * kx()), 'Y%.8f' % (y * ky()), file=fout)
 
 def draw_polygon(point_list):
     pencil_up()

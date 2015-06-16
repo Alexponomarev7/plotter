@@ -1,5 +1,18 @@
 #! /usr/bin/env python3
 
+
+from point import *
+
+def split_into_polylines(seq):
+    g = []
+    for el in seq:
+        if el is None:
+            yield g
+            g = []
+        else:
+            g.append(point(el[0], el[1]))
+    yield g
+
 GLYPH_WIDTH = 11
 GLYPH_HEIGHT = 14
 

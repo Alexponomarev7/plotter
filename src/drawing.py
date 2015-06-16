@@ -2,7 +2,7 @@
 # Distributed under the terms of the MIT License.
 
 from PIL import Image, ImageDraw, ImageFont
-from .getaxes import get
+from getaxes import get
 
 WIDTH = 1485
 HEIGHT = 1050
@@ -66,6 +66,6 @@ def draw(points, name, ptype, SCALE = None):
                 points[i + 1].x, points[i + 1].y], RED)
 
     # PIL image can be saved as .png .jpg .gif or .bmp file (among others)
-    filename = "img/" + name + ".gif"
+    filename = "../www/img/" + name + ".gif"
     image.save(filename)
     
