@@ -22,7 +22,7 @@ def main(name, p):
     
     # for i in range(len(points) - 1):
     #    panel.create_line(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y, fill="red")
-    draw(points, name, "bezier")
+    draw(points, name, "bezier", p)
     
     # root.mainloop()
     

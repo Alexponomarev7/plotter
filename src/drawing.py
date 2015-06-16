@@ -54,7 +54,10 @@ def draw(points, name, ptype, SCALE = None):
                        WIDTH / 2 + 5,
                        (HEIGHT / 2) - new], BLACK)
             y += 1
-                
+    elif ptype is "bezier":
+        p = SCALE
+        for i in p:
+            draw.rectangle([i.x - 5, i.y + 5, i.x + 5, i.y - 5], outline=BLACK, fill="blue")
                 
     for i in range(len(points) - 1):
         # do the PIL image/draw (in memory) drawings

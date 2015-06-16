@@ -20,15 +20,15 @@ def func(x, function):
 # Creating graphic
 def create_graphic(function, x_pos, y_pos, SCALE, name):
     graphic = []
-    min_x = int(-(WIDTH / (2 * SCALE)) - 1)
-    max_x = int(WIDTH / (2 * SCALE) + 1)
+    min_x = -(WIDTH / (2 * SCALE))
+    max_x = WIDTH / (2 * SCALE)
     dx = 1 / PRECISION
     last = 0
-    for i in range(min_x * PRECISION, max_x * PRECISION + 1):
-        j = i / PRECISION
+    while min_x <= max_x:
+        min_x += dx        
         try:
-            new_y = -func(j, function)
-            p = point(j * SCALE + WIDTH / 2,
+            new_y = -func(min_x, function)
+            p = point(min_x * SCALE + WIDTH / 2,
                 new_y * SCALE + HEIGHT / 2)
             if abs(last - new_y) / dx >= CHECK:
                 graphic.append(None)
@@ -38,7 +38,7 @@ def create_graphic(function, x_pos, y_pos, SCALE, name):
             raise
         except:
             continue
- 
+         
     draw(graphic, name, "graphic", SCALE)
 
 
