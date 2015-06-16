@@ -4,6 +4,10 @@ import sys
 import os
 import time
 
+sys.path.append("/".join(os.path.abspath(__file__).split("/")[:-3] + ["driver"]))
+
+import api
+
 seed = sys.argv[1]
 
 def log(string):
@@ -24,7 +28,7 @@ def gen_cnc():
     filename = "tasks/" + seed + ".py"
     with open(filename, 'r') as f:
         code = compile(f.read(), filename, "exec")
-        exec(code, {'driver_dir': "/".join(os.path.abspath(__file__).split("/")[:-3] + ['driver'])})
+        exec(code)
         
 
 def send_cnc():

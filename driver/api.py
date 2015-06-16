@@ -30,6 +30,17 @@ def transform(pt, matr=None):
 #    print(matr)
     return ans
 
+def split_into_polylines(seq):
+    g = []
+    for el in seq:
+        if el is None:
+            yield g
+            g = []
+        else:
+            g.append(point(el[0], el[1]))
+    yield g
+
+
 def default_matrix():
     return matrix(eye(3))
 
@@ -99,7 +110,7 @@ def draw_text(text, x, y, glyph_width=None, glyph_height=None):
     if glyph_width is None:
         glyph_width = 11
         glyph_height = 14
-    else if glyph_height is None:
+    elif glyph_height is None:
         glyph_height = glyph_width
         glyph_width = (11. / 14.) * glyph_height
 
@@ -108,7 +119,7 @@ def draw_text(text, x, y, glyph_width=None, glyph_height=None):
     for symbol in text:
         if symbol not in gl.glyphs:
             symbol = ' '
-        polylines = gl.split_into_polylines(gl.glyphs[symbol])
+        polylines = split_into_polylines(gl.glyphs[symbol])
         for pl in polylines:
             draw_polyline(list(map(lambda x: transform(x, m), pl)))
         m = T(glyph_width, 0) * m
