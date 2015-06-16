@@ -58,8 +58,9 @@ def draw(points, name, ptype, SCALE = None):
                 
     for i in range(len(points) - 1):
         # do the PIL image/draw (in memory) drawings
-        draw.line([points[i].x, points[i].y,
-            points[i + 1].x, points[i + 1].y], RED)
+        if points[i] != None and points[i + 1] != None:
+            draw.line([points[i].x, points[i].y,
+                points[i + 1].x, points[i + 1].y], RED)
 
     # PIL image can be saved as .png .jpg .gif or .bmp file (among others)
     filename = "../www/img/" + name + ".gif"
