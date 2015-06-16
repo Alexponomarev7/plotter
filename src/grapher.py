@@ -26,7 +26,7 @@ def create_graphic(function, x_pos, y_pos, SCALE, path):
         j = i / PRECISION
         try:
             p = point(j * SCALE + WIDTH / 2,
-                      -func(j, function) * SCALE + HEIGHT / 2)
+                -func(j, function) * SCALE + HEIGHT / 2)
             graphic.append(p)
         except:
             continue
@@ -36,8 +36,8 @@ def create_graphic(function, x_pos, y_pos, SCALE, path):
 
 # Creating GUI
 def main(path, function, x_pos, y_pos, SCALE):
-    global PRECISIOM
-    PRECISION = SCALE / 10
+    global PRECISION
+    PRECISION = int(SCALE // 10)
     
     graphic = []
     create_graphic(function, x_pos, y_pos, SCALE, path)    
