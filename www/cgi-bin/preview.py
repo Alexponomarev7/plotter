@@ -109,7 +109,8 @@ else:
             <body>
                 <h1>Preview</h1>
                 <p>Number of formulas: """ + str(len(objects)) + """</p>
-                <img width="800" src="/img/""" + seed.value + """.gif" />
+                <img border="1px" width="800" src="/img/""" + seed.value + """.gif" />
+                <br />
                 <button onclick="window.location.href='/cgi-bin/print.py'">
                     Print
                 </button>
