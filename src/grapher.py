@@ -8,6 +8,7 @@ from point import point
 from drawing import draw
 import sys, traceback
 
+CHECK = 10000      # Checking for discontinue
 WIDTH = 1485     # 210 mm
 HEIGHT = 1050    # 297 mm
 PRECISION = 10
@@ -29,14 +30,13 @@ def create_graphic(function, x_pos, y_pos, SCALE, name):
             new_y = -func(j, function)
             p = point(j * SCALE + WIDTH / 2,
                 new_y * SCALE + HEIGHT / 2)
-            if abs(last - new_y) / dx >= 10 ** 2:
+            if abs(last - new_y) / dx >= CHECK:
                 graphic.append(None)
             last = new_y
             graphic.append(p)
         except NameError:
             raise
         except:
-            print(traceback.format_exc(), file=sys.stderr)
             continue
  
     draw(graphic, name, "graphic", SCALE)
@@ -45,7 +45,7 @@ def create_graphic(function, x_pos, y_pos, SCALE, name):
 # Creating GUI
 def main(name, function, x_pos, y_pos, SCALE):
     global PRECISION
-    PRECISION = int(SCALE // 10)
+    PRECISION = int(SCALE) * 10
     
     graphic = []
     create_graphic(function, x_pos, y_pos, SCALE, name)    
