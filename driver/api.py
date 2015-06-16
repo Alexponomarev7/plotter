@@ -95,7 +95,14 @@ def draw_polyline(point_list):
 def draw_rect(x1, y1, x2, y2):
     draw_polygon([point(x1, y1), point(x1, y2), point(x2, y2), point(x2, y1)])
 
-def draw_text(text, x, y, glyph_width=11, glyph_height=14):
+def draw_text(text, x, y, glyph_width=None, glyph_height=None):
+    if glyph_width is None:
+        glyph_width = 11
+        glyph_height = 14
+    else if glyph_height is None:
+        glyph_height = glyph_width
+        glyph_width = (11. / 14.) * glyph_height
+
     m = T(x, y) * S(glyph_width / gl.GLYPH_WIDTH, glyph_height / gl.GLYPH_HEIGHT)
     
     for symbol in text:
