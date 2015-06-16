@@ -1,3 +1,6 @@
+# Copyright (c) Alex Ponomarev.
+# Distributed under the terms of the MIT License.
+
 from point import point
 
 # Vector's radius

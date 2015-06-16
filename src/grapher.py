@@ -1,7 +1,6 @@
 # Copyright (c) Alex Ponomarev.
 # Distributed under the terms of the MIT License.
 
-import tkinter
 from math import sqrt, sin, cos, pi
 from math import tan as tg
 from point import point
@@ -30,6 +29,7 @@ def create_graphic(function, x_pos, y_pos, SCALE, name):
             new_y = -func(min_x, function)
             p = point(min_x * SCALE + WIDTH / 2,
                 new_y * SCALE + HEIGHT / 2)
+            # Checking for discontinue in function
             if abs(last - new_y) / dx >= CHECK:
                 graphic.append(None)
             last = new_y
@@ -42,10 +42,8 @@ def create_graphic(function, x_pos, y_pos, SCALE, name):
     draw(graphic, name, "graphic", SCALE)
 
 
-# Creating GUI
+# Creating main porgramm
 def main(name, function, x_pos, y_pos, SCALE):
     global PRECISION
     PRECISION = int(SCALE) * 10
-    
-    graphic = []
     create_graphic(function, x_pos, y_pos, SCALE, name)    

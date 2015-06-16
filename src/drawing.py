@@ -11,6 +11,7 @@ WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 
+
 # drawing GIF image
 def draw(points, name, ptype, SCALE = None):
     font = ImageFont.truetype(font="Arial", size=20)
@@ -63,9 +64,8 @@ def draw(points, name, ptype, SCALE = None):
         # do the PIL image/draw (in memory) drawings
         if points[i] != None and points[i + 1] != None:
             draw.line([points[i].x, points[i].y,
-                points[i + 1].x, points[i + 1].y], RED)
+                       points[i + 1].x, points[i + 1].y], RED)
 
     # PIL image can be saved as .png .jpg .gif or .bmp file (among others)
     filename = "../www/img/" + name + ".gif"
     image.save(filename)
-    
