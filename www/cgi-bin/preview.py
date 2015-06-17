@@ -94,6 +94,12 @@ elif errors:
             <head>
                 <meta charset="utf-8" />
                 <title>Plotter error</title>
+		<style>
+ 		  body {
+   		    background: black; /* Цвет фона */
+    		    color: white; /* Цвет текста */
+  		  }
+  		</style>
             </head>
             <body>
                 <p>
@@ -102,6 +108,9 @@ elif errors:
                 <button onClick="history.go(-1); return false;">
                     Go back
                 </button>
+		<br />
+		<br />
+		<img src="/img/cat.jpg" alt="ГОВНОКОД!!!"/>
             </body>
         </html>
     """)
