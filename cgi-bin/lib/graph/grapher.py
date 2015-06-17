@@ -14,6 +14,13 @@ WIDTH = const.X_REAL_RESOLUTION * const.PIXELS_PER_MM   # 210 mm
 HEIGHT = const.Y_REAL_RESOLUTION * const.PIXELS_PER_MM  # 297 mm
 PRECISION = 10
 
+f = []
+
+def func_decorator(function):
+    def func_inner(x):
+        return func(x, function)
+    return func_inner
+
 # Parsing function
 def func(x, function):
     return eval(function)
@@ -29,6 +36,8 @@ def create_graphic(function, x_pos, y_pos, SCALE, name):
         min_x += dx        
         try:
             new_y = -func(min_x, function)
+            if type(new_y) is complex:
+                continue
             p = point(min_x * SCALE + WIDTH / 2,
                 new_y * SCALE + HEIGHT / 2)
             if abs(last - new_y) / dx >= CHECK:
@@ -39,14 +48,22 @@ def create_graphic(function, x_pos, y_pos, SCALE, name):
             raise
         except:
             continue
-         
-    draw(graphic, name, "graphic", SCALE)
+
+    return graphic
+#    draw(graphic, name, "graphic", SCALE)
 
 
 # Creating GUI
-def main(name, function, x_pos, y_pos, SCALE):
+def main(name, function_list, x_pos, y_pos, SCALE):
     global PRECISION
     PRECISION = int(SCALE) * 10
     
     graphic = []
-    create_graphic(function, x_pos, y_pos, SCALE, name)    
+
+    f[:] = [func_decorator(function) for function in function_list]
+    for function in function_list:
+        points = create_graphic(function, x_pos, y_pos, SCALE, name)    
+        graphic += [None]
+        graphic += points
+
+    draw(graphic, name, "graphic", SCALE)
