@@ -5,7 +5,7 @@ from .drawing import draw
 
 
 def main(name, p):
-    print("Здравствуйте!")
+    # print("Здравствуйте!")
     # root = Tk()
     # panel = Canvas(root, width = 500, height = 500)
     # panel.pack()

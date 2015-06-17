@@ -38,7 +38,7 @@ print("""<!DOCTYPE html>
                             <input type="text" name="y_pos" value="0" />
                         </td>
                         <td>
-                            Scale, px:
+                            Scale, %:
                         </td>
                         <td>
                             <input type="text" name="scale" value="100" />

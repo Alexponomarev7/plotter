@@ -6,11 +6,12 @@ from math import sqrt, sin, cos, pi
 from math import tan as tg
 from .point import point
 from .drawing import draw
+from .. import const
 import sys, traceback
 
 CHECK = 10000      # Checking for discontinue
-WIDTH = 1485     # 210 mm
-HEIGHT = 1050    # 297 mm
+WIDTH = const.X_REAL_RESOLUTION * const.PIXELS_PER_MM   # 210 mm
+HEIGHT = const.Y_REAL_RESOLUTION * const.PIXELS_PER_MM  # 297 mm
 PRECISION = 10
 
 # Parsing function

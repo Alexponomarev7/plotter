@@ -3,9 +3,10 @@
 
 from PIL import Image, ImageDraw, ImageFont
 from .getaxes import get
+from .. import const
 
-WIDTH = 1485
-HEIGHT = 1050
+WIDTH = const.X_REAL_RESOLUTION * const.PIXELS_PER_MM   # 210 mm
+HEIGHT = const.Y_REAL_RESOLUTION * const.PIXELS_PER_MM  # 297 mm
 CENTER = HEIGHT // 2
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
@@ -66,6 +67,6 @@ def draw(points, name, ptype, SCALE = None):
                 points[i + 1].x, points[i + 1].y], RED)
 
     # PIL image can be saved as .png .jpg .gif or .bmp file (among others)
-    filename = "img/" + name + ".gif"
+    filename = const.IMAGE_PATH + name + ".gif"
     image.save(filename)
     
