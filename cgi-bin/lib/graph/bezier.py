@@ -4,7 +4,7 @@ from .algorithmbezier import bezier, algorithmbezier
 from .drawing import draw
 
 
-def main(name, p):
+def main(name, p, settings):
     # print("Здравствуйте!")
     # root = Tk()
     # panel = Canvas(root, width = 500, height = 500)
@@ -22,7 +22,9 @@ def main(name, p):
     
     # for i in range(len(points) - 1):
     #    panel.create_line(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y, fill="red")
-    draw(points, name, "bezier", p)
+    aux_task = draw(points, name, "bezier", p, settings)
+
+    return (aux_task, points)
     
     # root.mainloop()
     

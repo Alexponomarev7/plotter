@@ -7,8 +7,8 @@ import http.cookies
 import time
 import traceback
 
-from lib.graph.point import point
 import plotter_interface as pl
+from lib.graph.point import point
 
 cookie = http.cookies.SimpleCookie(os.environ.get("HTTP_COOKIE"))
 seed = cookie.get("seed")
@@ -24,32 +24,28 @@ task_type = form.getvalue("task_type")
 # max_y = float(form.getvalue("max_y"))
 
 objects = [None] * int(form.getvalue("num_of_objects"))
+settings = dict()
 
 errors = False
 try:
     if task_type == "graph":
         for i in range(len(objects)):
-            objects[i] = str(form.getvalue('function_' + str(i), '0'))
-            x_pos = float(form.getvalue("x_pos", 0))
-            y_pos = float(form.getvalue("y_pos", 0))
-            scale = int(form.getvalue("scale", 100))
-            # print(x_pos, y_pos, scale, file=sys.stderr)
-            pl.graph(seed.value, objects, x_pos, y_pos, scale)
+            objects[i] = (str(form.getvalue('function_' + str(i), '0')), bool(form.getvalue("draw_" + str(i), '')))
+            settings["x_pos"] = float(form.getvalue("x_pos", 0))
+            settings["y_pos"] = float(form.getvalue("y_pos", 0))
+            settings["scale"] = int(form.getvalue("scale", 100))
     elif task_type == "bezier":
         for i in range(len(objects)):
             objects[i] = point(float(form.getvalue('x_' + str(i), '0')), float(form.getvalue('y_' + str(i), '0')))
+            settings["draw_anchor"] = bool(form.getvalue("draw_anchor", ''))
 
     print(objects, file=sys.stderr)
 
     if seed is not None:
         if task_type == "graph":
-            x_pos = float(form.getvalue("x_pos", 0))
-            y_pos = float(form.getvalue("y_pos", 0))
-            scale = float(form.getvalue("scale", 1))
-            print(x_pos, y_pos, scale, file=sys.stderr)
-            pl.graph(seed.value, objects, x_pos, y_pos, scale)
+            pl.graph(seed.value, objects, settings)
         elif task_type == "bezier":
-            pl.bezier(seed.value, objects)
+            pl.bezier(seed.value, objects, settings)
 
 except Exception as e:
     print(type(e), file=sys.stderr)

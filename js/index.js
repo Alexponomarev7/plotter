@@ -20,6 +20,7 @@ $(document).ready(function() {
         state = BEZIER;
         $(".input").hide();
         $("#points").show();
+        $("#bezier_settings").show();
         
         update_points();
         
@@ -41,6 +42,7 @@ $(document).ready(function() {
         var len = $("#functions").find("tr").each(function(index) {
             $(this).find("p").html("f<sub>" + index + "</sub>(x): ");
             $(this).find(":text").attr("name", "function_" + index).attr("placeholder", "0");
+            $(this).find(":checkbox").attr("name", "draw_" + index).attr("value", "True");
         }).length;
         if(state == GRAPH) {
             $("#num").attr("value", len);
@@ -64,7 +66,8 @@ $(document).ready(function() {
     
     var add_function = function(not_update) {
         $("#functions").append('<tr><td><p></p></td><td>' +
-        '<input type="text" /></td>' + 
+        '<input type="text" /></td>' +
+        '<td><input type="checkbox" checked/>Show</td>' +
         '<td><button type="button" class="rm_btn">Remove</button></td></tr>');
         
         if(not_update != true) {

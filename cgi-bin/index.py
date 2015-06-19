@@ -8,7 +8,7 @@ print("""<!DOCTYPE html>
         <html>
         <head>
             <meta charset="utf-8" />
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <script src="/js/jquery.min.js"></script>
             <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 <!--            <link href="/css/style.css" rel="stylesheet" /> -->
             <title>Plotter</title>
@@ -25,16 +25,16 @@ print("""<!DOCTYPE html>
                 </table>
                 <table id="graph_settings" class="input" hidden>
                     <tr>
-                        <td>
-                           X coordinate in center:
+                        <td hidden>
+                            X coordinate in center:
                         </td>
-                        <td>
+                        <td hidden>
                             <input type="text" name="x_pos" value="0" />
                         </td>
-                        <td>
+                        <td hidden>
                             Y coordinate in center:
                         </td>
-                        <td>
+                        <td hidden>
                             <input type="text" name="y_pos" value="0" />
                         </td>
                         <td>
@@ -42,6 +42,16 @@ print("""<!DOCTYPE html>
                         </td>
                         <td>
                             <input type="text" name="scale" value="100" />
+                        </td>
+                    </tr>
+                </table>
+                <table id="bezier_settings" class="input" hidden>
+                    <tr>
+                        <td>
+                            Draw anchor points:
+                        </td>
+                        <td>
+                            <input type="checkbox" name="draw_anchor" value="True" />
                         </td>
                     </tr>
                 </table>

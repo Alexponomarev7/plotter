@@ -73,12 +73,18 @@ def end():
     drv.end_document()
 
 def draw_line(start, end):
+    if type(start) is tuple:
+        start = point(start[0], start[1])
+    if type(end) is tuple:
+        end = point(end[0], end[1])
     t_start = transform(start)
     t_end = transform(end)
     drv.move_to(t_start.x, t_start.y)
     drv.line_to(t_end.x, t_end.y)
 
 def draw_polygon(point_list):
+    if len(point_list) < 2:
+        return
     t_point_list = list(map(transform, point_list))
     drv.draw_polygon(t_point_list)
 
@@ -95,10 +101,12 @@ def draw_ellipse(x1, y1, x2, y2):
     draw_polygon(point_list)
 
 def draw_polyline(point_list):
+    if len(point_list) < 2:
+        return
     t_point_list = list(map(transform, point_list))
     drv.draw_polyline(t_point_list)
 
-def draw_rect(x1, y1, x2, y2):
+def draw_rectangle(x1, y1, x2, y2):
     draw_polygon([point(x1, y1), point(x1, y2), point(x2, y2), point(x2, y1)])
 
 def draw_text(text, x, y, glyph_width=None, glyph_height=None):

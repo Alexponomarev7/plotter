@@ -26,8 +26,10 @@ def is_locked():
 def gen_cnc():          
     filename = "tasks/" + seed + ".py"
     with open(filename, 'r') as f:
-        code = compile(f.read(), filename, "exec")
-        exec(code)
+        #code = compile(f.read(), filename, "exec")
+        #log("1")
+        exec(f.read())
+        #log("2")
         
 
 def send_cnc():
@@ -47,10 +49,10 @@ def main():
         log("sending cnc")
         send_cnc()
         log("done")
-    except:
+    except Exception as e:
+        log("ERROR")
         print(sys.exc_info()[0])
-    finally:
-        unlock()
-        log("stopped")
+    unlock()
+    log("stopped")
     
 main()

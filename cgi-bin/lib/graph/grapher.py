@@ -25,6 +25,9 @@ def func_decorator(function):
 def func(x, function):
     return eval(function)
 
+def ctg(x):
+    return 1 / tg(x)
+
 # Creating graphic
 def create_graphic(function, x_pos, y_pos, SCALE, name):
     graphic = []
@@ -56,14 +59,16 @@ def create_graphic(function, x_pos, y_pos, SCALE, name):
 # Creating GUI
 def main(name, function_list, x_pos, y_pos, SCALE):
     global PRECISION
-    PRECISION = int(SCALE) * 10
+    PRECISION = int(SCALE) * const.PRECISION_MULTIPLIER
     
     graphic = []
 
-    f[:] = [func_decorator(function) for function in function_list]
+    f[:] = [func_decorator(function[0]) for function in function_list]
     for function in function_list:
-        points = create_graphic(function, x_pos, y_pos, SCALE, name)    
-        graphic += [None]
-        graphic += points
+        if function[1]:
+            points = create_graphic(function[0], x_pos, y_pos, SCALE, name)    
+            graphic += [None]
+            graphic += points
 
-    draw(graphic, name, "graphic", SCALE)
+    aux_task = draw(graphic, name, "graphic", SCALE)
+    return (aux_task, graphic)

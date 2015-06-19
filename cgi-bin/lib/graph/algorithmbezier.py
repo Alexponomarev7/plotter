@@ -18,7 +18,7 @@ def bezier(P, t):
   
 def algorithmbezier(P):
     points = []
-    for i in range(100):
+    for i in range(101):
         t = i / 100
         points.append(bezier(P, t))
 
