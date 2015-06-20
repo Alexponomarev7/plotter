@@ -3,7 +3,8 @@
 
 from PIL import Image, ImageDraw, ImageFont
 from .getaxes import get
-from .. import const
+from .. import const, web
+from ..driver.api import API
 
 WIDTH = const.X_REAL_RESOLUTION * const.PIXELS_PER_MM   # 210 mm
 HEIGHT = const.Y_REAL_RESOLUTION * const.PIXELS_PER_MM  # 297 mm
@@ -12,85 +13,79 @@ WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 
-def draw_text(draw, pos, string, color, font):
-    draw.text(pos, string, color, font=font)
-    return ("t", (string, pos[0], pos[1]))
-
-def draw_line(draw, coords, color):
-    draw.line(coords, color)
-    return ("l", ((coords[0], coords[1]), (coords[2], coords[3])))
-
-def draw_rectangle(draw, coords, outline, fill):
-    draw.rectangle(coords, outline=outline, fill=fill)
-    return ("r", tuple(coords))
-
 # drawing GIF image
-def draw(points, name, ptype, SCALE = None, settings=None):
-    font = ImageFont.truetype("Ubuntu-C.ttf", 20)
-    # PIL create an empty image and draw object to draw on
-    # memory only, not visible
-    image = Image.new("RGB", (WIDTH, HEIGHT), WHITE)
-    draw = ImageDraw.Draw(image)
+def draw(points_iter, name, ptype, SCALE = None, settings=None, preview=True):
 
-    aux_task = []
-    
+    if preview:
+        font = ImageFont.truetype("Ubuntu-C.ttf", 20)
+        # PIL create an empty image and draw object to draw on
+        # memory only, not visible
+        image = Image.new("RGB", (WIDTH, HEIGHT), WHITE)
+        draw = ImageDraw.Draw(image)
+    else:
+        draw = API(const.CNC_PATH + name + ".cnc")
+
+
     if ptype is "graphic":
-        aux_task.append(draw_line(draw, [0, HEIGHT / 2, WIDTH, HEIGHT / 2], BLACK))
-        aux_task.append(draw_line(draw, [WIDTH / 2, 0, WIDTH / 2, HEIGHT], BLACK))
+        draw.line([0, HEIGHT / 2, WIDTH, HEIGHT / 2], BLACK)
+        draw.line([WIDTH / 2, 0, WIDTH / 2, HEIGHT], BLACK)
         
         step, koeff, k = get(WIDTH, SCALE)
         
         x = 1
         for i in range(step, (WIDTH // 2) * koeff, step):
             new = i / koeff
-            aux_task.append(draw_text(draw, (new + WIDTH / 2, (HEIGHT / 2) + 5), str(x / k), BLACK, font))
-            aux_task.append(
-                    draw_line(draw, 
+            draw.text((new + WIDTH / 2, (HEIGHT / 2) + 5), str(x / k), BLACK, font=font)
+            draw.line(
                         [new + WIDTH / 2,
                        (HEIGHT / 2) - 5,
                        new + WIDTH / 2,
-                       (HEIGHT / 2) + 5], BLACK))
-            aux_task.append(draw_text(draw, (-new + WIDTH / 2, (HEIGHT / 2) + 5), str(-x / k), BLACK, font))
-            aux_task.append(
-                    draw_line(draw, 
+                       (HEIGHT / 2) + 5], BLACK)
+            draw.text((-new + WIDTH / 2, (HEIGHT / 2) + 5), str(-x / k), BLACK, font=font)
+            draw.line(
                         [-new + WIDTH / 2,
                        (HEIGHT / 2) - 5,
                        -new + WIDTH / 2,
-                       (HEIGHT / 2) + 5], BLACK))
+                       (HEIGHT / 2) + 5], BLACK)
             x += 1
         
         y = 1
         for i in range(step, (HEIGHT // 2) * koeff, step):
             new = i / koeff
-            aux_task.append(draw_text(draw, (WIDTH / 2 + 5, (HEIGHT / 2) + new), str(-y / k), BLACK, font))
-            aux_task.append(
-                    draw_line(draw, 
+            draw.text((WIDTH / 2 + 5, (HEIGHT / 2) + new), str(-y / k), BLACK, font=font)
+            draw.line(
                         [WIDTH / 2 - 5,
                        (HEIGHT / 2) + new,
                        WIDTH / 2 + 5,
-                       (HEIGHT / 2) + new], BLACK))
-            aux_task.append(draw_text(draw, (WIDTH / 2 + 5, (HEIGHT / 2) - new), str(y / k), BLACK, font))
-            aux_task.append(
-                    draw_line(draw, 
+                       (HEIGHT / 2) + new], BLACK)
+            draw.text((WIDTH / 2 + 5, (HEIGHT / 2) - new), str(y / k), BLACK, font=font)
+            draw.line(
                         [WIDTH / 2 - 5,
                        (HEIGHT / 2) - new,
                        WIDTH / 2 + 5,
-                       (HEIGHT / 2) - new], BLACK))
+                       (HEIGHT / 2) - new], BLACK)
             y += 1
     elif ptype is "bezier":
         p = SCALE
         if "draw_anchor" in settings and settings["draw_anchor"]:
             for i in p:
-                aux_task.append(draw_rectangle(draw, [i.x - 5, i.y + 5, i.x + 5, i.y - 5], BLACK, "blue"))
+                draw.rectangle([i.x - 5, i.y + 5, i.x + 5, i.y - 5], outline=BLACK, fill="blue")
                 
-    for i in range(len(points) - 1):
+    
+    last_point = None
+    for pt in points_iter:
         # do the PIL image/draw (in memory) drawings
-        if points[i] != None and points[i + 1] != None:
-            draw.line([points[i].x, points[i].y,
-                points[i + 1].x, points[i + 1].y], RED)
+        if pt != None and last_point != None:
+            draw.line([pt.x, pt.y,
+                last_point.x, last_point.y], RED)
+        last_point = pt
 
-    # PIL image can be saved as .png .jpg .gif or .bmp file (among others)
-    filename = const.IMAGE_PATH + name + ".gif"
-    image.save(filename)
-    return aux_task
+    if preview:
+        web.update_status("Saving to file")
+        # PIL image can be saved as .png .jpg .gif or .bmp file (among others)
+        filename = const.IMAGE_PATH + name + const.IMAGE_EXT
+        image.save(filename)
+        web.update_status("Done")
+    else:
+        draw.close()
 

@@ -5,6 +5,9 @@ import sys
 import subprocess
 
 from os import path
+from lib import const
+
+os.chdir(const.SITE_DIR)
 
 cookie = http.cookies.SimpleCookie(os.environ.get("HTTP_COOKIE"))
 seed = cookie.get("seed").value
@@ -38,7 +41,7 @@ print("""<!DOCTYPE html>
             <h1>Printing now...</h1>""")
 
 # subprocess.call("python3 cgi-bin/executor.py " + seed, shell=True)
-subprocess.Popen([sys.executable, "cgi-bin/executor.py", seed])
+subprocess.Popen(["cgi-bin/executor.py", seed])
 
 print('<a href="/">Home</a>')
      

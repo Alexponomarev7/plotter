@@ -6,8 +6,9 @@ from math import sqrt, sin, cos, pi
 from math import tan as tg
 from .point import point
 from .drawing import draw
-from .. import const
+from .. import const, web
 import sys, traceback
+import itertools
 
 CHECK = 10000      # Checking for discontinue
 WIDTH = const.X_REAL_RESOLUTION * const.PIXELS_PER_MM   # 210 mm
@@ -28,47 +29,70 @@ def func(x, function):
 def ctg(x):
     return 1 / tg(x)
 
+
+
 # Creating graphic
-def create_graphic(function, x_pos, y_pos, SCALE, name):
-    graphic = []
+def create_graphic(function, x_pos, y_pos, SCALE, name, preview, percent_edges=None):
+#    graphic = []
     min_x = -(WIDTH / (2 * SCALE))
     max_x = WIDTH / (2 * SCALE)
+    x = min_x
     dx = 1 / PRECISION
-    last = 0
-    while min_x <= max_x:
-        min_x += dx        
+    last = 0    
+
+    old_percent_done = -1
+
+    while x <= max_x:
+        x += dx        
         try:
-            new_y = -func(min_x, function)
+            percent_done = int((x - min_x) * 100 / (max_x - min_x))
+            if percent_done != old_percent_done and preview:
+                web.update_status("Completed " + 
+                        str(int(percent_done / 100.0 * (percent_edges[1] - percent_edges[0]) + 
+                            percent_edges[0])) + "%")
+                old_percent_done = percent_done
+            
+            new_y = -func(x, function)
             if type(new_y) is complex:
-                continue
-            p = point(min_x * SCALE + WIDTH / 2,
+                raise ArithmeticError
+            p = point(x * SCALE + WIDTH / 2,
                 new_y * SCALE + HEIGHT / 2)
             if abs(last - new_y) / dx >= CHECK:
-                graphic.append(None)
+                yield None
             last = new_y
-            graphic.append(p)
+            yield p
         except NameError:
             raise
+        except SyntaxError:
+            raise
         except:
-            continue
+            yield None
 
-    return graphic
+    yield None
+
+#    return graphic
 #    draw(graphic, name, "graphic", SCALE)
 
-
 # Creating GUI
-def main(name, function_list, x_pos, y_pos, SCALE):
+def main(name, function_list, x_pos, y_pos, SCALE, preview):
     global PRECISION
     PRECISION = int(SCALE) * const.PRECISION_MULTIPLIER
     
-    graphic = []
+    graphic_iter = []
 
     f[:] = [func_decorator(function[0]) for function in function_list]
+
+    functions = 0
     for function in function_list:
         if function[1]:
-            points = create_graphic(function[0], x_pos, y_pos, SCALE, name)    
-            graphic += [None]
-            graphic += points
+            functions += 1
 
-    aux_task = draw(graphic, name, "graphic", SCALE)
-    return (aux_task, graphic)
+    cur_function = 0
+    for function in function_list:
+        if function[1]:
+            point_iter = create_graphic(function[0], x_pos, y_pos, SCALE, name, 
+                    preview, (cur_function  * 100 / functions, (cur_function + 1) * 100 / functions))    
+            cur_function += 1
+            graphic_iter += [point_iter]
+    
+    draw(itertools.chain.from_iterable(graphic_iter), name, "graphic", SCALE, preview)
