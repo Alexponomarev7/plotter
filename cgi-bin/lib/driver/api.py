@@ -40,7 +40,7 @@ class API:
                 yield g
                 g = []
             else:
-                g.append(point(el[0], el[1]))
+                g.append(point(el[0], el[1]) if type(el) is not point else el)
         yield g
 
 
@@ -111,7 +111,7 @@ class API:
     def draw_polyline(self, point_list):
         if len(point_list) < 2:
             return
-        t_point_list = list(map(transform, point_list))
+        t_point_list = list(map(self.transform, point_list))
         self.drv.draw_polyline(t_point_list)
 
     def draw_rectangle(self, x1, y1, x2, y2):
@@ -136,11 +136,15 @@ class API:
             m = self.T(glyph_width, 0) * m
 
     # Added for compability with ImageDraw from PILLOW
-    def line(self, points, color):
+    def line(self, points, color=None):
         self.draw_line((points[0], points[1]), (points[2], points[3]))
 
-    def text(self, pt, text, font):
+    def text(self, pt, text, color=None, font=None):
         self.draw_text(text, pt[0], pt[1])
 
-    def rectangle(self, points, outline, filling):
+    def rectangle(self, points, outline=None, filling=None):
         self.draw_rectange(points[0], points[1], points[2], points[3])
+
+    def draw_polylines(self, pt_iter):
+        for polyline in self.split_into_polylines(pt_iter):
+            self.draw_polyline(polyline)

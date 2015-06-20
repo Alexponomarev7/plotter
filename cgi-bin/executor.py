@@ -3,14 +3,18 @@
 import sys
 import os
 import time
+import traceback
 
 from lib.driver import api
 from lib.graph import point
+from lib import const
+from lib.log import *
+
+import plotter_interface as pl
+
+os.chdir(const.SITE_DIR)
 
 seed = sys.argv[1]
-
-def log(string):
-    return print(os.getpid(), string, file=sys.stderr)
 
 def lock():
     open('.lock', 'a').close()
@@ -24,7 +28,7 @@ def is_locked():
     return os.path.exists('.lock')
 
 def gen_cnc():          
-    filename = "tasks/" + seed + ".py"
+    filename = const.TASKS_PATH + seed + const.TASKS_EXT
     with open(filename, 'r') as f:
         #code = compile(f.read(), filename, "exec")
         #log("1")
@@ -51,7 +55,8 @@ def main():
         log("done")
     except Exception as e:
         log("ERROR")
-        print(sys.exc_info()[0])
+        tb = traceback.format_exc()
+        print(tb, file=sys.stderr)
     unlock()
     log("stopped")
     

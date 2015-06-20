@@ -7,14 +7,16 @@ from os import path
 from lib.graph import grapher, bezier as bz
 from lib.graph.point import *
 from lib import const
+from lib.log import *
 
-def graph(name, functions, settings): # x_pos, y_pos, scale):
+def graph(name, functions, settings, preview): # x_pos, y_pos, scale):
     x_pos, y_pos, scale = settings['x_pos'], settings['y_pos'], settings['scale']
-    grapher.main(name, functions, x_pos, y_pos, scale / 10 * const.PIXELS_PER_MM, True)
+    log("pl.graph")
+    grapher.main(name, functions, x_pos, y_pos, scale / 10 * const.PIXELS_PER_MM, preview)
     # print_task(name, task)
 
-def bezier(name, p_list, settings):
-    bz.main(name, list(map(lambda p: point(p.x * const.PIXELS_PER_MM, p.y * const.PIXELS_PER_MM), p_list)), settings, True)
+def bezier(name, p_list, settings, preview):
+    bz.main(name, list(map(lambda p: point(p.x * const.PIXELS_PER_MM, p.y * const.PIXELS_PER_MM), p_list)), settings, preview)
     # print_task(name, task)
 
 # def print_task(name, task):

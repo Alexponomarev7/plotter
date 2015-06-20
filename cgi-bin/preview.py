@@ -116,14 +116,25 @@ else:
     try:
 #        web.update_status("Test")
         if task_type == "graph":
-            pl.graph(seed.value, objects, settings)
+            pl.graph(seed.value, objects, settings, True)
+            task_name = "pl.graph"
         elif task_type == "bezier":
-            pl.bezier(seed.value, objects, settings)
+            pl.bezier(seed.value, objects, settings, True)
+            task_name = "pl.bezier"
         print("""<script>
                     $("#status").html(\'<img border="1px" width="800" src="/""" + 
                     const.IMAGE_PATH + seed.value + const.IMAGE_EXT + """" />\');
                     $("a").show();
                 </script>""")
+        task_filename = const.TASKS_PATH + seed.value + const.TASKS_EXT
+        with open(task_filename, 'w') as f:
+            print("#! /usr/bin/env python3\n", file=f)
+            print("name =", repr(seed.value), file=f)
+            print("objects =", repr(objects), file=f)
+            print("settings =", repr(settings), file=f)
+            print(task_name, '(name, objects, settings, False)', file=f)
+            if sys.platform.startswith("linux"):
+                os.fchmod(f.fileno(), 0o777)
 
     except Exception as e:
         tb = traceback.format_exc()

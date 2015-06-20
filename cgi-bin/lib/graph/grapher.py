@@ -7,6 +7,7 @@ from math import tan as tg
 from .point import point
 from .drawing import draw
 from .. import const, web
+from ..log import *
 import sys, traceback
 import itertools
 
@@ -29,11 +30,14 @@ def func(x, function):
 def ctg(x):
     return 1 / tg(x)
 
-
+def recursive_function_stub(x):
+    raise ArithmeticError
 
 # Creating graphic
-def create_graphic(function, x_pos, y_pos, SCALE, name, preview, percent_edges=None):
+def create_graphic(function, function_number, x_pos, y_pos, SCALE, name, preview, percent_edges=None):
 #    graphic = []
+    func_backup, f[function_number] = f[function_number], recursive_function_stub
+
     min_x = -(WIDTH / (2 * SCALE))
     max_x = WIDTH / (2 * SCALE)
     x = min_x
@@ -67,7 +71,8 @@ def create_graphic(function, x_pos, y_pos, SCALE, name, preview, percent_edges=N
             raise
         except:
             yield None
-
+    
+    f[function_number] = func_backup
     yield None
 
 #    return graphic
@@ -88,11 +93,14 @@ def main(name, function_list, x_pos, y_pos, SCALE, preview):
             functions += 1
 
     cur_function = 0
+    cur_rendering_function = 0
     for function in function_list:
         if function[1]:
-            point_iter = create_graphic(function[0], x_pos, y_pos, SCALE, name, 
-                    preview, (cur_function  * 100 / functions, (cur_function + 1) * 100 / functions))    
-            cur_function += 1
+            point_iter = create_graphic(function[0], cur_function, x_pos, y_pos, SCALE, name, 
+                    preview, (cur_rendering_function  * 100 / functions, (cur_rendering_function + 1) * 100 / functions))    
+            cur_rendering_function += 1
             graphic_iter += [point_iter]
-    
-    draw(itertools.chain.from_iterable(graphic_iter), name, "graphic", SCALE, preview)
+        cur_function += 1
+    log("grapher.main") 
+    log(preview)
+    draw(itertools.chain.from_iterable(graphic_iter), name, "graphic", SCALE, {}, preview)

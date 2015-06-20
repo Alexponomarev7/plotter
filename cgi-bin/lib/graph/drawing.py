@@ -4,6 +4,7 @@
 from PIL import Image, ImageDraw, ImageFont
 from .getaxes import get
 from .. import const, web
+from ..log import *
 from ..driver.api import API
 
 WIDTH = const.X_REAL_RESOLUTION * const.PIXELS_PER_MM   # 210 mm
@@ -14,16 +15,17 @@ RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 
 # drawing GIF image
-def draw(points_iter, name, ptype, SCALE = None, settings=None, preview=True):
+def draw(points_iter, name, ptype, SCALE, settings, preview):
 
+    font = ImageFont.truetype("Ubuntu-C.ttf", 20)
+    log(preview)
     if preview:
-        font = ImageFont.truetype("Ubuntu-C.ttf", 20)
         # PIL create an empty image and draw object to draw on
         # memory only, not visible
         image = Image.new("RGB", (WIDTH, HEIGHT), WHITE)
         draw = ImageDraw.Draw(image)
     else:
-        draw = API(const.CNC_PATH + name + ".cnc")
+        draw = API(const.CNC_PATH + name + const.CNC_EXT)
 
 
     if ptype is "graphic":
@@ -71,14 +73,17 @@ def draw(points_iter, name, ptype, SCALE = None, settings=None, preview=True):
             for i in p:
                 draw.rectangle([i.x - 5, i.y + 5, i.x + 5, i.y - 5], outline=BLACK, fill="blue")
                 
-    
-    last_point = None
-    for pt in points_iter:
-        # do the PIL image/draw (in memory) drawings
-        if pt != None and last_point != None:
-            draw.line([pt.x, pt.y,
-                last_point.x, last_point.y], RED)
-        last_point = pt
+    if preview:
+        last_point = None
+        for pt in points_iter:
+            # do the PIL image/draw (in memory) drawings
+            if pt != None and last_point != None:
+                draw.line([pt.x, pt.y,
+                    last_point.x, last_point.y], RED)
+            last_point = pt
+    else:
+        draw.draw_polylines(points_iter)
+
 
     if preview:
         web.update_status("Saving to file")
@@ -87,5 +92,6 @@ def draw(points_iter, name, ptype, SCALE = None, settings=None, preview=True):
         image.save(filename)
         web.update_status("Done")
     else:
+        log("saving")
         draw.close()
 
