@@ -11,6 +11,7 @@ Can be used as typographic builder or Bezier's curves builder.
 
   * Python 3.4+
   * Pillow
+  * numpy
 
 ### Installation
 
