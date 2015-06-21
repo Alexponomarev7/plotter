@@ -93,4 +93,12 @@ $(document).ready(function() {
     };
     
     $("#graph").click();
+
+    $.get("/html/help.html", function(data){
+        $("#help_div").html(data);
+    });
+
+    $("#help_btn").click(function(){
+        $("#help_div").fadeToggle();
+    });
 });

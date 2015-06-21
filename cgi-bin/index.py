@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 import time
+from lib import const
 
 print("Set-cookie: seed=", time.time(), sep='')
 print("Content-type: text/html\n")
@@ -74,8 +75,8 @@ print("""<!DOCTYPE html>
                     </tr>
                 </table>
             </form>
-            <a href="/help.html">Help</a>
+            <button id="help_btn">Help</button>
+            <div id="help_div" hidden></div>
         </body>
         </html>
 """)
-
