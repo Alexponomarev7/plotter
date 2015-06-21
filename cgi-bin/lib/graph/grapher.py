@@ -1,7 +1,7 @@
 # Copyright (c) Alex Ponomarev.
 # Distributed under the terms of the MIT License.
 
-import tkinter
+# import tkinter
 from math import sqrt, sin, cos, pi
 from math import tan as tg
 from .point import point

@@ -1,4 +1,4 @@
-from tkinter import *
+# from tkinter import *
 from .point import point 
 from .algorithmbezier import bezier, algorithmbezier
 from .drawing import draw
