@@ -19,3 +19,6 @@ SITE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 # for lib.graph.grapher
 PRECISION_MULTIPLIER = 4
+
+#for lib.graph.algorithmbezier
+BEZIER_POINTS = 1000

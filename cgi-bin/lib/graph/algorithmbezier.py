@@ -1,4 +1,5 @@
 from .point import point
+from .. import const, web
 
 # Vector's radius
 def sumspoint(a, b, t):
@@ -16,8 +17,13 @@ def bezier(P, t):
         return bezier(newP, t)
     
   
-def algorithmbezier(P):
-    for i in range(101):
-        t = i / 100
+def algorithmbezier(P, preview):
+    percent = -1
+    for i in range(const.BEZIER_POINTS + 1):
+        t = i / const.BEZIER_POINTS
+        new_percent = int(t * 100)
+        if preview and new_percent != percent:
+            web.update_status("Completed %d%%" % new_percent)
+            percent = new_percent
         yield bezier(P, t)
 

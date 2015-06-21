@@ -18,7 +18,7 @@ def main(name, p, settings, preview):
     # for i in range(0, len(nums), 2):
     #    p.append(point(nums[i], nums[i + 1]))
     
-    points_iter = algorithmbezier(p)
+    points_iter = algorithmbezier(p, preview)
     
     # for i in range(len(points) - 1):
     #    panel.create_line(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y, fill="red")
