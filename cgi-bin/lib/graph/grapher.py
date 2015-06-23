@@ -3,7 +3,7 @@
 
 # import tkinter
 from math import sqrt, sin, cos, pi
-from math import tan as tg
+from math import tan as tg, atan as arctg, asin as arcsin, acos as arccos
 from .point import point
 from .drawing import draw
 from .. import const, web
@@ -29,6 +29,9 @@ def func(x, function):
 
 def ctg(x):
     return 1 / tg(x)
+
+def arcctg(x):
+    return pi - arctg(x)
 
 def recursive_function_stub(x):
     raise ArithmeticError
