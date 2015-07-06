@@ -93,7 +93,7 @@ class API:
     def draw_polygon(self, point_list):
         if len(point_list) < 2:
             return
-        t_point_list = list(map(transform, point_list))
+        t_point_list = list(map(self.transform, point_list))
         self.drv.draw_polygon(t_point_list)
 
     def draw_ellipse(self, x1, y1, x2, y2):

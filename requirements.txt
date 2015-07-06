@@ -1,2 +1,4 @@
 easy_install pillow
 sudo apt-get install python3-numpy
+pyparsing
+

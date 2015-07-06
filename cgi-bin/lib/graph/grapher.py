@@ -6,7 +6,7 @@ from math import sqrt, sin, cos, pi
 from math import tan as tg, atan as arctg, asin as arcsin, acos as arccos
 from .point import point
 from .drawing import draw
-from .. import const, web
+from .. import const, web, safe_checker
 from ..log import *
 import sys, traceback
 import itertools
@@ -92,6 +92,7 @@ def main(name, function_list, x_pos, y_pos, SCALE, preview):
 
     functions = 0
     for function in function_list:
+        safe_checker.check(function[0])
         if function[1]:
             functions += 1
 
