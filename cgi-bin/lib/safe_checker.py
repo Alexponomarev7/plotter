@@ -3,7 +3,7 @@
 safe_tokens = [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                 '+', '-', '*', '/',
                 '(', ')', '[', ']', 
-                'sin', 'cos', 'tg', 'ctg', 'arcsin', 'arccos', 'arctg', 'arcctg', 'f', 'pi', 'x',
+                'sin', 'cos', 'tg', 'ctg', 'arcsin', 'arccos', 'arctg', 'arcctg', 'f', 'pi', 'x', 'sgn',
                 ' ']
 
 class SafetyException(Exception):

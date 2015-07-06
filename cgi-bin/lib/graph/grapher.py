@@ -33,6 +33,9 @@ def ctg(x):
 def arcctg(x):
     return pi - arctg(x)
 
+def sgn(x):
+    return 0 if x == 0 else 1 if x > 0 else -1
+
 def recursive_function_stub(x):
     raise ArithmeticError
 
