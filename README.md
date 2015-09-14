@@ -19,6 +19,7 @@ Can be used as typographic builder or Bezier's curves builder.
 git clone https://github.com/Alexponomarev7/plotter
 cd XYplotter
 python3 setup.py install
+Add cleaner.py to your crontab
 ```
 
 ---

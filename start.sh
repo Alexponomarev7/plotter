@@ -3,9 +3,7 @@ if [ -f .lock ] ; then
     rm .lock
 fi
 
-rm img/*.*.gif
-rm tasks/*.*.py
-rm cnc/*.*.cnc
+./cleaner.py
 
 # python3 -m http.server --cgi 1998
 ./server.py
