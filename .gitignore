@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 plotter_API/.DS_Store
 
 .DS_Store
@@ -8,10 +6,10 @@ plotter_API/.DS_Store
 
 .DS_Store
 
-.DS_Store
-=======
 *~
-*.*.gif
+img/*
+tasks/*
+cnc/*
+
 */__pycache__/*
->>>>>>> origin/master
 driver/test*
