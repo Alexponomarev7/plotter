@@ -3,11 +3,10 @@
 
 # import tkinter
 from math import sqrt, sin, cos, pi
-from math import tan as tg, atan as arctg, asin as arcsin, acos as arccos
+from math import tan as tg, atan as arctg, asin as arcsin, acos as arccos, log, e
 from .point import point
 from .drawing import draw
 from .. import const, web, safe_checker
-from ..log import *
 import sys, traceback
 import itertools
 
@@ -108,6 +107,4 @@ def main(name, function_list, x_pos, y_pos, SCALE, preview):
             cur_rendering_function += 1
             graphic_iter += [point_iter]
         cur_function += 1
-    log("grapher.main") 
-    log(preview)
     draw(itertools.chain.from_iterable(graphic_iter), name, "graphic", SCALE, {}, preview)
