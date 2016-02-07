@@ -43,7 +43,7 @@ print("""<!DOCTYPE html>
 # subprocess.call("python3 cgi-bin/executor.py " + seed, shell=True)
 pid = subprocess.Popen(["cgi-bin/executor.py", seed]).pid
 print("<p>debug info: pid =", pid, "</p>")
-print('<a href="/">Home</a>')
+print('<a href="index.py">Home</a>')
      
 print("""<script>window.stop()</script>
         </body>

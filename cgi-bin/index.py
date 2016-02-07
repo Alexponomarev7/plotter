@@ -9,16 +9,16 @@ print("""<!DOCTYPE html>
         <html>
         <head>
             <meta charset="utf-8" />
-            <script src="/js/jquery.min.js"></script>
-            <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-<!--            <link href="/css/style.css" rel="stylesheet" /> -->
+            <script src="../js/jquery.min.js"></script>
+            <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<!--            <link href="../css/style.css" rel="stylesheet" /> -->
             <title>Plotter</title>
         </head>
         <body>
-            <script src="/js/index.js"></script>
+            <script src="../js/index.js"></script>
             <h1>XY Plotter v1.0</h1>
             <h2>Send a request: </h2>
-            <form action="/cgi-bin/preview.py" method="post">
+            <form action="preview.py" method="post">
                 <input id="num" type="hidden" name="num_of_objects" value="0" />
                 <table id="functions" class="input" hidden>
                 </table>

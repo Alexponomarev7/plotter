@@ -94,7 +94,7 @@ else:
             <head>
                 <meta charset="utf-8" />
                 <title>Plotter preview</title>
-                <script src="/js/jquery.min.js"></script>
+                <script src="../js/jquery.min.js"></script>
             </head>
             <body>
                 <h1>Preview</h1>
@@ -103,13 +103,13 @@ else:
 #                 <img border="1px" width="800" src="/img/""" + seed.value + """.gif" />
                 """
                 <br />
-                <button onclick="window.location.href='/cgi-bin/print.py'">
+                <button onclick="window.location.href='../cgi-bin/print.py'">
                     Print
                 </button>
                 <button onClick="history.go(-1); return false;">
                     Go back
                 </button>
-                <a href="/""" + const.IMAGE_PATH + seed.value + const.IMAGE_EXT + """" download hidden>Save image</a>
+                <a href="../""" + const.IMAGE_PATH + seed.value + const.IMAGE_EXT + """" download hidden>Save image</a>
     """) 
     sys.stdout.flush()
 
@@ -122,7 +122,7 @@ else:
             pl.bezier(seed.value, objects, settings, True)
             task_name = "pl.bezier"
         print("""<script>
-                    $("#status").html(\'<img border="1px" width="800" src="/""" + 
+                    $("#status").html(\'<img border="1px" width="800" src="../""" + 
                     const.IMAGE_PATH + seed.value + const.IMAGE_EXT + """" />\');
                     $("a").show();
                 </script>""")

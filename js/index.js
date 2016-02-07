@@ -94,7 +94,7 @@ $(document).ready(function() {
     
     $("#graph").click();
 
-    $.get("/html/help.html", function(data){
+    $.get("../html/help.html", function(data){
         $("#help_div").html(data);
     });
 
