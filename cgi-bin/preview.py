@@ -57,6 +57,7 @@ if seed is None:
         <html>
             <head>
                 <meta charset="utf-8" />
+                <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
                 <title>Plotter error</title>
             </head>
             <body>
@@ -93,6 +94,7 @@ else:
         <html>
             <head>
                 <meta charset="utf-8" />
+                <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
                 <title>Plotter preview</title>
                 <script src="../js/jquery.min.js"></script>
             </head>

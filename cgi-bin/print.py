@@ -19,6 +19,7 @@ if seed is None:
         <html>
             <head>
                 <meta charset="utf-8" />
+                <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
                 <title>Plotter error</title>
             </head>
             <body>
@@ -35,6 +36,7 @@ print("""<!DOCTYPE html>
     <html>
         <head>
             <meta charset="utf-8" />
+            <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
             <title>Plotter</title>
         </head>
         <body>
